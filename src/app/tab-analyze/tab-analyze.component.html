@@ -1,9 +1,21 @@
-<div class="tab-analyze">
-  <div>
-    <div style="display: block">
-      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
-    </div>
-    <button (click)="randomize()">Update</button>
+<div style="display: block">
+  <div class="selects">
+    <mat-form-field>
+      <mat-select [(value)]="chartType">
+        <mat-option value="pie">Pie</mat-option>
+        <mat-option value="doughnut">Doughnut</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select [(value)]="baseData">
+        <mat-option value="events">Events</mat-option>
+        <mat-option value="musea">Museums</mat-option>
+        <mat-option value="cinemas">Cinemas</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
+
+
+  <canvas #currentChart="base-chart" baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="chartType" [options]="chartOptions"></canvas>
 </div>

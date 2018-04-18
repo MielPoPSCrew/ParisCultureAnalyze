@@ -17,14 +17,16 @@ import { ChartsModule } from 'ng2-charts';
 // Angular Material
 import {
     MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatFormFieldModule,
+    MatSelectModule
 } from '@angular/material';
 
-
-
-const MATERIAL_MODULES = [
+const MATERIAL_MODULES = [
     MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatFormFieldModule,
+    MatSelectModule
 ];
 
 @NgModule({

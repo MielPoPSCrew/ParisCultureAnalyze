@@ -1,0 +1,11 @@
+.selects {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.mat-form-field {
+    flex: 1;
+    width: 100%;
+    margin: 0 5px;
+}

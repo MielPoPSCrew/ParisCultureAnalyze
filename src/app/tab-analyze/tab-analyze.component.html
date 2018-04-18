@@ -4,18 +4,20 @@
       <mat-select [(value)]="chartType">
         <mat-option value="pie">Pie</mat-option>
         <mat-option value="doughnut">Doughnut</mat-option>
+        <mat-option value="bar">Bar</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field>
-      <mat-select [(value)]="baseData">
+      <mat-select (change)="initChartData()" [(value)]="baseData">
         <mat-option value="events">Events</mat-option>
-        <mat-option value="musea">Museums</mat-option>
+        <mat-option value="museums">Museums</mat-option>
         <mat-option value="cinemas">Cinemas</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
 
+  <div class="title">{{baseData}} in Paris per quarter - {{chartType}} chart</div>
 
-  <canvas #currentChart="base-chart" baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="chartType" [options]="chartOptions"></canvas>
+  <canvas #currentChart="base-chart" baseChart [data]="chartData" [labels]="chartLabels" [chartType]="chartType" [options]="chartOptions"></canvas>
 </div>

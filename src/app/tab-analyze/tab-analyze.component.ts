@@ -1,56 +1,130 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
+import { environment } from '../../environments/environment';
+
+// mock
+import { mockCleanDataAnalyze } from '../../mocks/mockCleanDataAnalyze';
 
 @Component({
-  selector: 'app-tab-analyze',
-  templateUrl: './tab-analyze.component.html',
-  styleUrls: ['./tab-analyze.component.css']
+    selector: 'app-tab-analyze',
+    templateUrl: './tab-analyze.component.html',
+    styleUrls: ['./tab-analyze.component.css']
 })
 export class TabAnalyzeComponent implements OnInit {
+    // @ViewChild('currentChart')
+    // currentChart: BaseChartDirective;
 
-  constructor() { }
+    public chartType = 'pie';
+    public dataSelected = 'Events';
+    public env = environment;
+    public chartLabels: string[];
+    public chartData: number[];
+    public chartOptions: any;
+    public mockCleanDataAnalyze = mockCleanDataAnalyze;
+    public isSorted = false;
+    public shouldRefresh = true;
+    public chartColors: any[];
 
-  ngOnInit() {
-  }
-  public barChartOptions:any = {
-    scaleShowVerticalLines: false,
-    responsive: true
-  };
-  public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType:string = 'bar';
-  public barChartLegend:boolean = true;
- 
-  public barChartData:any[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
- 
-  // events
-  public chartClicked(e:any):void {
-    console.log(e);
-  }
- 
-  public chartHovered(e:any):void {
-    console.log(e);
-  }
- 
-  public randomize():void {
-    // Only Change 3 values
-    let data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      (Math.random() * 100),
-      56,
-      (Math.random() * 100),
-      40];
-    let clone = JSON.parse(JSON.stringify(this.barChartData));
-    clone[0].data = data;
-    this.barChartData = clone;
-    /**
-     * (My guess), for Angular to recognize the change in the dataset
-     * it has to change the dataset variable directly,
-     * so one way around it, is to clone the data, change it and then
-     * assign it;
-     */
-  }
+    constructor() { }
+
+    ngOnInit() {
+        this.chartLabels = this.env.cpList;
+        this.chartColors = this.env.colorList;
+
+        this.chartOptions = {
+            legend: {
+                position: 'right',
+                labels: {
+                    fontSize: 14
+                }
+            }
+        };
+
+        this.initChartData();
+    }
+
+    initChartData = () => {
+        // To force refresh...
+        this.shouldRefresh = !this.shouldRefresh;
+
+        this.chartLabels = this.env.cpList;
+        this.chartColors = this.env.colorList;
+
+        switch (this.dataSelected) {
+            case 'Events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
+            case 'Museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
+            case 'Cinemas': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.cinemas); break;
+        }
+
+        if (this.isSorted) {
+            this.chartLabels = [];
+            this.chartColors = [{ backgroundColor: [] }];
+            this.chartData.sort(this.sortValues).map(this.sortLabels);
+            this.chartLabels.map(this.sortColors);
+        }
+
+        if (this.chartType === 'pie' || this.chartType === 'doughnut') {
+            const tmpData = this.chartData;
+            this.chartData = [];
+            tmpData.map(this.flattenObject);
+        }
+
+        console.log('data', this.chartData);
+        console.log('labels', this.chartLabels);
+        console.log('colors', this.chartColors);
+    }
+
+    formatDataToSort = (data) => {
+        const newFormat = [];
+
+        data.map((label, index) => {
+            newFormat.push({
+                data: [data[index]],
+                label: this.chartLabels[index],
+                backgroundColor: this.env.cpColorList[this.chartLabels[index]]
+            });
+        });
+
+        return newFormat;
+    }
+
+    sortValues = (a, b) => b.data[0] - a.data[0];
+    sortLabels = data => { this.chartLabels.push(data.label); };
+    sortColors = data => { this.chartColors[0].backgroundColor.push(this.env.cpColorList[data]); };
+    flattenObject = data => { this.chartData.push(data.data[0]); };
 }
+
+// DO NOT REMOVE : OLD STUFF
+// if (this.chartType === 'pie' || this.chartType === 'doughnut') {
+//     switch (this.dataSelected) {
+//         case 'events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
+//         case 'museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
+//         case 'cinemas': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.cinemas); break;
+//     }
+//     if (this.isSorted) {
+//         this.chartLabels = [];
+//         this.chartData.sort(this.sortValues).map(this.sortLabels);
+//         const tmpData = this.chartData;
+//         this.chartData = [];
+//         tmpData.map((data) => {
+//             console.log(data);
+//             this.chartData.push(data.data[0]);
+//         });
+//     }
+// }
+// if (this.chartType === 'bar') {
+//     switch (this.dataSelected) {
+//         case 'events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
+//         case 'museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
+//         case 'cinemas': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.cinemas); break;
+//     }
+
+//     if (this.isSorted) {
+//         this.chartLabels = [];
+//         this.chartData.sort(this.sortValues).map(this.sortLabels);
+//     }
+//     // console.log('chartLabels', this.chartLabels);
+// }
+
+// console.log('data', this.chartData);
+// console.log('labels', this.chartLabels);

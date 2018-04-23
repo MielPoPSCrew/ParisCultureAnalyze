@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 // Components
 import { AppComponent } from './app.component';
@@ -17,14 +18,18 @@ import { ChartsModule } from 'ng2-charts';
 // Angular Material
 import {
     MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCheckboxModule,
 } from '@angular/material';
 
-
-
-const MATERIAL_MODULES = [
+const MATERIAL_MODULES = [
     MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCheckboxModule
 ];
 
 @NgModule({
@@ -41,6 +46,7 @@ const MATERIAL_MODULES = [
         BrowserModule,
         BrowserAnimationsModule,
         ChartsModule,
+        FormsModule,
         MATERIAL_MODULES
     ],
     providers: [],

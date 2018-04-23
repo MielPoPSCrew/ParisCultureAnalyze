@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 // Components
 import { AppComponent } from './app.component';
@@ -19,14 +20,16 @@ import {
     MatToolbarModule,
     MatTabsModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
 } from '@angular/material';
 
 const MATERIAL_MODULES = [
     MatToolbarModule,
     MatTabsModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule
 ];
 
 @NgModule({
@@ -43,6 +46,7 @@ const MATERIAL_MODULES = [
         BrowserModule,
         BrowserAnimationsModule,
         ChartsModule,
+        FormsModule,
         MATERIAL_MODULES
     ],
     providers: [],

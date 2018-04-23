@@ -11,18 +11,19 @@ import { mockCleanDataAnalyze } from '../../mocks/mockCleanDataAnalyze';
     styleUrls: ['./tab-analyze.component.css']
 })
 export class TabAnalyzeComponent implements OnInit {
-    @ViewChild('currentChart')
-    currentChart: BaseChartDirective;
-    // private originalClick
+    // @ViewChild('currentChart')
+    // currentChart: BaseChartDirective;
 
     public chartType = 'pie';
-    public baseData = 'events';
+    public dataSelected = 'Events';
     public env = environment;
     public chartLabels: string[];
     public chartData: number[];
     public chartOptions: any;
     public mockCleanDataAnalyze = mockCleanDataAnalyze;
     public formattedData: any;
+    public isSorted = false;
+    public shouldRefresh = true;
 
     constructor() { }
 
@@ -32,7 +33,7 @@ export class TabAnalyzeComponent implements OnInit {
             legend: {
                 position: 'right',
                 labels: {
-                  fontSize: 14
+                    fontSize: 14
                 }
             }
         };
@@ -41,45 +42,75 @@ export class TabAnalyzeComponent implements OnInit {
     }
 
     initChartData = () => {
+        // To force refresh...
+        this.shouldRefresh = !this.shouldRefresh;
+        this.chartLabels = this.env.cpList;
+        switch (this.dataSelected) {
+            case 'Events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
+            case 'Museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
+            case 'Cinemas': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.cinemas); break;
+        }
+
+        if (this.isSorted) {
+            this.chartLabels = [];
+            this.chartData.sort(this.sortValues).map(this.sortLabels);
+        }
+
         if (this.chartType === 'pie' || this.chartType === 'doughnut') {
-            switch (this.baseData) {
-                case 'events': this.chartData = this.mockCleanDataAnalyze.events; break;
-                case 'museums': this.chartData = this.mockCleanDataAnalyze.museums; break;
-                case 'cinemas': this.chartData = this.mockCleanDataAnalyze.cinemas; break;
-            }
+            const tmpData = this.chartData;
+            this.chartData = [];
+            tmpData.map(this.flattenObject);
         }
-        if (this.chartType === 'bar') {
-            switch (this.baseData) {
-                case 'events': this.chartData = this.formatDataForBarChart(this.mockCleanDataAnalyze.events); break;
-                case 'museums': this.chartData = this.formatDataForBarChart(this.mockCleanDataAnalyze.museums); break;
-                case 'cinemas': this.chartData = this.formatDataForBarChart(this.mockCleanDataAnalyze.cinemas); break;
-            }
-        }
+        console.log('data', this.chartData);
+        console.log('labels', this.chartLabels);
     }
 
-    formatDataForBarChart = (data) => {
+    formatDataToSort = (data) => {
         const newFormat = [];
 
-        data.map((d, index) => {
-            const tmpArray = [];
-            data.map((dd, ii) => {
-                if (index === ii) {
-                    tmpArray.push(dd);
-                } else {
-                    tmpArray.push(0);
-                }
-            });
-            newFormat.push(tmpArray);
+        data.map((label, index) => {
+            newFormat.push({ data: [data[index]], label: this.chartLabels[index] });
         });
 
-        console.log(newFormat);
         return newFormat;
     }
-    // filterData(toggleFilter) {
-    //     console.log(this.currentChart);
-    //     this.currentChart.chart.legend.onClick = function(e, legendItem) {
-    //         this.original.call(this, e, legendItem);
-    //         console.log('HEHEHEHE');
-    //     };
-    // }
+
+    sortValues = (a, b) => b.data[0] - a.data[0];
+    sortLabels = data => { this.chartLabels.push(data.label); };
+    flattenObject = (data, i) => { this.chartData.push(data.data[0]); };
 }
+
+// DO NOT REMOVE : OLD STUFF
+// if (this.chartType === 'pie' || this.chartType === 'doughnut') {
+//     switch (this.dataSelected) {
+//         case 'events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
+//         case 'museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
+//         case 'cinemas': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.cinemas); break;
+//     }
+//     if (this.isSorted) {
+//         this.chartLabels = [];
+//         this.chartData.sort(this.sortValues).map(this.sortLabels);
+//         const tmpData = this.chartData;
+//         this.chartData = [];
+//         tmpData.map((data) => {
+//             console.log(data);
+//             this.chartData.push(data.data[0]);
+//         });
+//     }
+// }
+// if (this.chartType === 'bar') {
+//     switch (this.dataSelected) {
+//         case 'events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
+//         case 'museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
+//         case 'cinemas': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.cinemas); break;
+//     }
+
+//     if (this.isSorted) {
+//         this.chartLabels = [];
+//         this.chartData.sort(this.sortValues).map(this.sortLabels);
+//     }
+//     // console.log('chartLabels', this.chartLabels);
+// }
+
+// console.log('data', this.chartData);
+// console.log('labels', this.chartLabels);

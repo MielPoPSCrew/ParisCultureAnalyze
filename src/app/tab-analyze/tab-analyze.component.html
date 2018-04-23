@@ -21,16 +21,19 @@
 
   <div class="title">{{dataSelected}} in Paris per quarter - {{chartType}} chart</div>
 
-  <canvas *ngIf="chartType == 'pie' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [chartType]="chartType"
-    [options]="chartOptions"></canvas>
-  <canvas *ngIf="chartType == 'pie' && !shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [chartType]="chartType"
-    [options]="chartOptions"></canvas>
+  <canvas *ngIf="chartType == 'pie' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
+    [chartType]="chartType" [options]="chartOptions"></canvas>
+  <canvas *ngIf="chartType == 'pie' && !shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
+    [chartType]="chartType" [options]="chartOptions"></canvas>
 
-  <canvas *ngIf="chartType === 'doughnut' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [chartType]="chartType"
-    [options]="chartOptions"></canvas>
-  <canvas *ngIf="chartType === 'doughnut' && !shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [chartType]="chartType"
-    [options]="chartOptions"></canvas>
+  <canvas *ngIf="chartType === 'doughnut' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
+    [chartType]="chartType" [options]="chartOptions"></canvas>
+  <canvas *ngIf="chartType === 'doughnut' && !shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
+    [chartType]="chartType" [options]="chartOptions"></canvas>
 
-  <canvas *ngIf="chartType === 'bar'" baseChart [datasets]="chartData" [labels]="[dataSelected]" [chartType]="chartType" [options]="chartOptions"></canvas>
+  <canvas *ngIf="chartType === 'bar' && shouldRefresh" baseChart [datasets]="chartData" [labels]="[dataSelected]" [chartType]="chartType"
+    [colors]="chartColors" [options]="chartOptions"></canvas>
+  <canvas *ngIf="chartType === 'bar' && !shouldRefresh" baseChart [datasets]="chartData" [labels]="[dataSelected]" [chartType]="chartType"
+    [colors]="chartColors" [options]="chartOptions"></canvas>
 
 </div>

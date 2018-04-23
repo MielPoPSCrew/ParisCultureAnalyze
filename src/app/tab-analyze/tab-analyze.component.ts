@@ -21,14 +21,16 @@ export class TabAnalyzeComponent implements OnInit {
     public chartData: number[];
     public chartOptions: any;
     public mockCleanDataAnalyze = mockCleanDataAnalyze;
-    public formattedData: any;
     public isSorted = false;
     public shouldRefresh = true;
+    public chartColors: any[];
 
     constructor() { }
 
     ngOnInit() {
         this.chartLabels = this.env.cpList;
+        this.chartColors = this.env.colorList;
+
         this.chartOptions = {
             legend: {
                 position: 'right',
@@ -44,7 +46,10 @@ export class TabAnalyzeComponent implements OnInit {
     initChartData = () => {
         // To force refresh...
         this.shouldRefresh = !this.shouldRefresh;
+
         this.chartLabels = this.env.cpList;
+        this.chartColors = this.env.colorList;
+
         switch (this.dataSelected) {
             case 'Events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
             case 'Museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
@@ -53,7 +58,9 @@ export class TabAnalyzeComponent implements OnInit {
 
         if (this.isSorted) {
             this.chartLabels = [];
+            this.chartColors = [{ backgroundColor: [] }];
             this.chartData.sort(this.sortValues).map(this.sortLabels);
+            this.chartLabels.map(this.sortColors);
         }
 
         if (this.chartType === 'pie' || this.chartType === 'doughnut') {
@@ -61,15 +68,21 @@ export class TabAnalyzeComponent implements OnInit {
             this.chartData = [];
             tmpData.map(this.flattenObject);
         }
+
         console.log('data', this.chartData);
         console.log('labels', this.chartLabels);
+        console.log('colors', this.chartColors);
     }
 
     formatDataToSort = (data) => {
         const newFormat = [];
 
         data.map((label, index) => {
-            newFormat.push({ data: [data[index]], label: this.chartLabels[index] });
+            newFormat.push({
+                data: [data[index]],
+                label: this.chartLabels[index],
+                backgroundColor: this.env.cpColorList[this.chartLabels[index]]
+            });
         });
 
         return newFormat;
@@ -77,7 +90,8 @@ export class TabAnalyzeComponent implements OnInit {
 
     sortValues = (a, b) => b.data[0] - a.data[0];
     sortLabels = data => { this.chartLabels.push(data.label); };
-    flattenObject = (data, i) => { this.chartData.push(data.data[0]); };
+    sortColors = data => { this.chartColors[0].backgroundColor.push(this.env.cpColorList[data]); };
+    flattenObject = data => { this.chartData.push(data.data[0]); };
 }
 
 // DO NOT REMOVE : OLD STUFF

@@ -16,3 +16,8 @@
     text-align: center;
     text-transform: uppercase;
 }
+
+.mat-checkbox {
+    line-height: 65px;
+    padding-left: 15px;
+}

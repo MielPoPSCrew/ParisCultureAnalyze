@@ -1,0 +1,14 @@
+.main-container {
+    margin-top: 20px;
+
+    .mat-tab-group {
+        margin: 0 10%;
+    }
+
+    /deep/ .mat-tab-label {
+        flex: 1;
+    }
+}
+
+
+

@@ -22,6 +22,11 @@ import {
     MatFormFieldModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatSortModule,
+    MatIconModule
 } from '@angular/material';
 
 const MATERIAL_MODULES = [
@@ -29,7 +34,12 @@ const MATERIAL_MODULES = [
     MatTabsModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatSortModule,
+    MatIconModule
 ];
 
 @NgModule({

@@ -55,7 +55,7 @@ export class TabCompareComponent implements OnInit {
             }
         };
     }
-    
+
     initChartsData = () => {
         // To force refresh...
         this.shouldRefresh = !this.shouldRefresh;

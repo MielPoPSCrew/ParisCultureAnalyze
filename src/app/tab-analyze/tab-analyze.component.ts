@@ -31,6 +31,10 @@ export class TabAnalyzeComponent implements OnInit {
         this.chartLabels = this.env.cpList;
         this.chartColors = this.env.colorList;
 
+        this.initChartData();
+    }
+
+    initChartOptions = () => {
         this.chartOptions = {
             legend: {
                 position: 'right',
@@ -39,13 +43,13 @@ export class TabAnalyzeComponent implements OnInit {
                 }
             }
         };
-
-        this.initChartData();
     }
 
     initChartData = () => {
         // To force refresh...
         this.shouldRefresh = !this.shouldRefresh;
+
+        this.initChartOptions();
 
         this.chartLabels = this.env.cpList;
         this.chartColors = this.env.colorList;
@@ -67,6 +71,16 @@ export class TabAnalyzeComponent implements OnInit {
             const tmpData = this.chartData;
             this.chartData = [];
             tmpData.map(this.flattenObject);
+        }
+
+        if (this.chartType === 'bar') {
+            this.chartOptions.scales = {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            };
         }
 
         console.log('data', this.chartData);

@@ -1,3 +1,4 @@
+<!-- TODO displya block ? -->
 <div style="display: block">
   <div class="selects">
     <mat-form-field>
@@ -21,9 +22,9 @@
 
   <div class="title">{{dataSelected}} in Paris per quarter - {{chartType}} chart</div>
 
-  <canvas *ngIf="chartType == 'pie' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
+  <canvas *ngIf="chartType === 'pie' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
     [chartType]="chartType" [options]="chartOptions"></canvas>
-  <canvas *ngIf="chartType == 'pie' && !shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
+  <canvas *ngIf="chartType === 'pie' && !shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
     [chartType]="chartType" [options]="chartOptions"></canvas>
 
   <canvas *ngIf="chartType === 'doughnut' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"

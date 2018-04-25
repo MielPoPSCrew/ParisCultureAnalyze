@@ -7,7 +7,7 @@ import { mockCleanDataArray } from '../../mocks/mockCleanDataArray';
 @Component({
     selector: 'app-tab-array',
     templateUrl: './tab-array.component.html',
-    styleUrls: ['./tab-array.component.css']
+    styleUrls: ['./tab-array.component.scss']
 })
 export class TabArrayComponent implements OnInit {
 
@@ -24,10 +24,6 @@ export class TabArrayComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.mockCleanDataArray.data);
     }
 
-    /**
-     * Set the paginator and sort after the view init since this component will
-     * be able to query its view for the initialized paginator and sort.
-     */
     // tslint:disable-next-line:use-life-cycle-interface
     ngAfterViewInit() {
         this.dataSource.paginator = this.paginator;
@@ -35,8 +31,8 @@ export class TabArrayComponent implements OnInit {
     }
 
     applyFilter(filterValue: string) {
-        filterValue = filterValue.trim(); // Remove whitespace
-        filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+        filterValue = filterValue.trim();
+        filterValue = filterValue.toLowerCase();
         this.dataSource.filter = filterValue;
     }
 }

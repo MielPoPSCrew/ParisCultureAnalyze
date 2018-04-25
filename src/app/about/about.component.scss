@@ -1,0 +1,19 @@
+.about {
+    margin: 20px 15%;
+
+    .back {
+        font-size: 1.2em;
+        cursor: pointer;
+
+        &:focus {
+            outline: 0;
+        }
+
+        .mat-icon {
+            margin-right: 2px;
+            display: inline-flex;
+            vertical-align: middle;
+            padding-bottom: 3px;
+        }
+    }
+}

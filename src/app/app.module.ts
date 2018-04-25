@@ -32,6 +32,10 @@ import {
     MatSortModule,
     MatIconModule
 } from '@angular/material';
+import { CinemaService } from './services/cinema.service';
+import { EventService } from './services/event.service';
+import { MuseumService } from './services/museum.service';
+import { ParisCultureService } from './services/paris-culture.service';
 
 const MATERIAL_MODULES = [
     MatToolbarModule,
@@ -73,7 +77,12 @@ const appRoutes: Routes = [
         FormsModule,
         ...MATERIAL_MODULES
     ],
-    providers: [],
+    providers: [
+      CinemaService,
+      EventService,
+      MuseumService,
+      ParisCultureService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,6 +9,9 @@
       "outDir": "dist",
       "assets": [
         "assets",
+        "data/cinemas.json",
+        "data/events.json",
+        "data/museums.json",
         "favicon.ico"
       ],
       "index": "index.html",

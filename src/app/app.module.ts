@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 // Components
 import { AppComponent } from './app.component';
@@ -11,6 +13,7 @@ import { TabArrayComponent } from './tab-array/tab-array.component';
 import { TabAnalyzeComponent } from './tab-analyze/tab-analyze.component';
 import { TabMapComponent } from './tab-map/tab-map.component';
 import { TabCompareComponent } from './tab-compare/tab-compare.component';
+import { AboutComponent } from './about/about.component';
 
 // Modules
 import { ChartsModule } from 'ng2-charts';
@@ -42,6 +45,12 @@ const MATERIAL_MODULES = [
     MatIconModule
 ];
 
+const appRoutes: Routes = [
+    { path: '', component: MainContainerComponent },
+    { path: 'about', component: AboutComponent }
+];
+
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -50,13 +59,16 @@ const MATERIAL_MODULES = [
         TabArrayComponent,
         TabAnalyzeComponent,
         TabMapComponent,
-        TabCompareComponent
+        TabCompareComponent,
+        AboutComponent
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         ChartsModule,
         FormsModule,
+        RouterModule,
+        HttpClientModule,
         MATERIAL_MODULES
     ],
     providers: [],

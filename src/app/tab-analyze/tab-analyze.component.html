@@ -1,40 +1,38 @@
-<!-- TODO displya block ? -->
-<div style="display: block">
-  <div class="selects">
-    <mat-form-field>
-      <mat-select [(value)]="chartType" (change)="initChartData()">
-        <mat-option value="pie">Pie</mat-option>
-        <mat-option value="doughnut">Doughnut</mat-option>
-        <mat-option value="bar">Bar</mat-option>
-      </mat-select>
-    </mat-form-field>
+<div class="tab-analyze">
+    <div class="selects">
+        <mat-form-field>
+            <mat-select [(value)]="chartType" (change)="initChartData()">
+            <mat-option value="pie">Pie</mat-option>
+            <mat-option value="doughnut">Doughnut</mat-option>
+            <mat-option value="bar">Bar</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-select [(value)]="dataSelected" (change)="initChartData()">
-        <mat-option value="Events">Events</mat-option>
-        <mat-option value="Museums">Museums</mat-option>
-        <mat-option value="Cinemas">Cinemas</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-form-field>
+            <mat-select [(value)]="dataSelected" (change)="initChartData()">
+            <mat-option value="Events">Events</mat-option>
+            <mat-option value="Museums">Museums</mat-option>
+            <mat-option value="Cinemas">Cinemas</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <mat-checkbox [(ngModel)]="isSorted" (change)="initChartData()">Sort</mat-checkbox>
-  </div>
+        <mat-checkbox [(ngModel)]="isSorted" (change)="initChartData()">Sort</mat-checkbox>
+    </div>
 
-  <div class="title">{{dataSelected}} in Paris per quarter - {{chartType}} chart</div>
+    <div class="title">{{dataSelected}} in Paris per quarter - {{chartType}} chart</div>
 
-  <canvas *ngIf="chartType === 'pie' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
+    <canvas *ngIf="chartType === 'pie' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
     [chartType]="chartType" [options]="chartOptions"></canvas>
-  <canvas *ngIf="chartType === 'pie' && !shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
-    [chartType]="chartType" [options]="chartOptions"></canvas>
-
-  <canvas *ngIf="chartType === 'doughnut' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
-    [chartType]="chartType" [options]="chartOptions"></canvas>
-  <canvas *ngIf="chartType === 'doughnut' && !shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
+    <canvas *ngIf="chartType === 'pie' && !shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
     [chartType]="chartType" [options]="chartOptions"></canvas>
 
-  <canvas *ngIf="chartType === 'bar' && shouldRefresh" baseChart [datasets]="chartData" [labels]="[dataSelected]" [chartType]="chartType"
+    <canvas *ngIf="chartType === 'doughnut' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
+    [chartType]="chartType" [options]="chartOptions"></canvas>
+    <canvas *ngIf="chartType === 'doughnut' && !shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
+    [chartType]="chartType" [options]="chartOptions"></canvas>
+
+    <canvas *ngIf="chartType === 'bar' && shouldRefresh" baseChart [datasets]="chartData" [labels]="[dataSelected]" [chartType]="chartType"
     [colors]="chartColors" [options]="chartOptions"></canvas>
-  <canvas *ngIf="chartType === 'bar' && !shouldRefresh" baseChart [datasets]="chartData" [labels]="[dataSelected]" [chartType]="chartType"
+    <canvas *ngIf="chartType === 'bar' && !shouldRefresh" baseChart [datasets]="chartData" [labels]="[dataSelected]" [chartType]="chartType"
     [colors]="chartColors" [options]="chartOptions"></canvas>
-
 </div>

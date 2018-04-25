@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Components
 import { AppComponent } from './app.component';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { MainContainerComponent } from './main-container/main-container.component';
 import { TabArrayComponent } from './tab-array/tab-array.component';
@@ -47,7 +48,8 @@ const MATERIAL_MODULES = [
 
 const appRoutes: Routes = [
     { path: '', component: MainContainerComponent },
-    { path: 'about', component: AboutComponent }
+    { path: 'about', component: AboutComponent },
+    { path: '**', component: MainContainerComponent }
 ];
 
 
@@ -63,13 +65,13 @@ const appRoutes: Routes = [
         AboutComponent
     ],
     imports: [
+        RouterModule.forRoot(appRoutes),
+        HttpClientModule,
         BrowserModule,
         BrowserAnimationsModule,
         ChartsModule,
         FormsModule,
-        RouterModule,
-        HttpClientModule,
-        MATERIAL_MODULES
+        ...MATERIAL_MODULES
     ],
     providers: [],
     bootstrap: [AppComponent]

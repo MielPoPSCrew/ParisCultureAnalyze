@@ -1,5 +1,88 @@
 <div class="about">
     <div class="back" routerLink="">
-        <mat-icon>keyboard_backspace</mat-icon> Back
+    <mat-icon>keyboard_backspace</mat-icon> Back
+    </div>
+
+    <div class="topic">
+        <div class="title">Le projet</div>
+        <div class="content">
+            <p>XML Project est un projet universitaire développé par quatre apprentis ingénieurs en informatique en dernière année
+                (2017/2018) à <a href="http://www.polytech.u-psud.fr/fr/index.html" target="_blank">Polytech' Paris-Sud</a> dans le cadre de la matière "Données semi-structurées".</p>
+
+            <p>Nous proposons d'analyser la répartition des lieux et évènements culturels repartis sur la ville de 
+                Paris (intramuros) en se basant sur les données fournies librement par la Mairie de Paris : les évènements, les salles de cinémas et les musées.</p>
+
+            <p>S'il est difficile de prétendre couvrir l'intégralité des manifestations culturelles avec si peu de données, 
+                nous proposons de les manipuler afin d'apporter des angles de lecture différents et d'en tirer, pourquoi pas, des informations peu évidentes aux premiers abords.</p>
+
+            <!-- TODO : format JSON aussi ? -->
+            <p>Le sujet initial requiert la manipulation des données et leur traitement mais également l'uniformisation de leur format 
+                pour finalement proposer leur export au format XML. C'est également une fonctionnalité que nous avons implémenté facilitant 
+                ainsi la réutilisation potentielle des données par des utilisateurs.</p>
+        </div>
+    </div>
+
+    <div class="topic">
+        <div class="title">Fonctionnalités</div>
+
+        <div class="content">
+            <p>Quatre visualisations différentes sont proposées par XML Project.</p>
+
+            <p class="primary">Analyze</p>
+
+            <p>ANALYZE propose de visualiser les données de façon globale. En sélectionnant de centrer l'analyse sur les différents types de manifestation culturelle 
+                il est possible de comparer leur quantité en fonction des différents arrondissements. Des outils comme le filtrage des données, le tri ou encore 
+                le changement de type de graph permettent d'affiner la recherche selon l'utilisation ou les préférences.</p>
+
+            <p class="primary">Map</p>
+
+            <!-- TODO : etoffer selon ce qu'on pourra dev pour cette viz -->
+            <p>MAP permet de visualiser les différentes manifestations culturelles réparties géographiquement sur une carte de Paris.</p>
+
+            <p class="primary">Compare</p>
+
+            <p>COMPARE offre des outils de comparaison prenant pour cible deux arrondissements précis de Paris afin de comparer leur données entre elles. 
+                Il est encore une fois possible de modifier le type de graphs utilisés ainsi que d'éliminer les données non importantes à l'analyse désirée.</p>
+
+            <p class="primary">Array</p>
+
+            <p>ARRAY est une outil très classique des données mais néanmoins utile lorsque le besoin se rapproche d'une recherche ou d'une sélection 
+                précise dans l'ensemble de données. ARRAY propose une représentation des données sous forme de tableau ainsi qu'un lot incontournable d'outils : 
+                le filtrage, la recherche ou encore le tri. </p>
+
+            <p>Afin de répondre pleinement aux exigences initiales du sujet, XML Project propose également l'export des données sous le format XML ainsi 
+                qu'un schema XSD les validant.</p>
+        </div>
+    </div>
+
+    <div class="topic">
+        <div class="title">Auteurs</div>
+        <div class="content">
+            <ul>
+                <li><a href="https://twitter.com/ThomasCottin" target="_blank">Thomas Cottin</a></li>
+                <li><a href="https://twitter.com/omnisnash" target="_blank">Clément Garin</a></li>
+                <li><a href="https://twitter.com/LeoDonny_" target="_blank">Léo Donny</a></li>
+                <li><a href="" target="_blank">Romain Laneuville</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="topic">
+        <div class="title">Technologies</div>
+
+        <div class="content">
+            <p><a href="https://angular.io/" target="_blank">Angular :)</a> ainsi que la librairie <a href="https://www.chartjs.org/" target="_blank">Chart.js</a> 
+                adaptée à Angular via <a href="https://valor-software.com/ng2-charts/" target="_blank">ng2-charts</a>.</p>
+        </div>
+    </div>
+
+    <div class="topic">
+        <div class="title">Sources</div>
+
+        <div class="content">
+            <!-- TODO : Github project link -->
+            <p>Le <a href="" target="_blank">GitHub du projet</a> est à disosition pour toute remarque ou question ! 
+                Toutes les données utilisées sont issues de l'<a href="https://opendata.paris.fr/" target="_blank">API mise à disposition par la Mairie de Paris</a>.</p>
+        </div>
     </div>
 </div>

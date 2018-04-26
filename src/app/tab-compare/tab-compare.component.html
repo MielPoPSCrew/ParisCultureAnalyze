@@ -1,53 +1,51 @@
 <div class="tab-compare">
-  <div class="selects">
-    <mat-form-field>
-      <mat-select [(value)]="chartsType" (change)="initChartsData()">
-        <mat-option value="pie">Pie</mat-option>
-        <mat-option value="doughnut">Doughnut</mat-option>
-        <mat-option value="bar">Bar</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="selects">
+        <mat-form-field>
+            <mat-select [(value)]="chartsType" (change)="initChartsData()">
+            <mat-option value="pie">Pie</mat-option>
+            <mat-option value="doughnut">Doughnut</mat-option>
+            <mat-option value="bar">Bar</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-select [(value)]="dataSelected" (change)="initChartsData()" multiple>
-        <mat-option value="Events">Events</mat-option>
-        <mat-option value="Museums">Museums</mat-option>
-        <mat-option value="Cinemas">Cinemas</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-form-field>
+            <mat-select [(value)]="dataSelected" (change)="initChartsData()" multiple>
+            <mat-option value="Events">Events</mat-option>
+            <mat-option value="Museums">Museums</mat-option>
+            <mat-option value="Cinemas">Cinemas</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-select [(value)]="quarterSelected_1" (change)="initChartsData()">
-        <mat-option *ngFor="let quarter of env.cpList" [value]="quarter">{{quarter}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+        <mat-form-field>
+            <mat-select [(value)]="quarterSelected_1" (change)="initChartsData()">
+            <mat-option *ngFor="let quarter of env.cpList" [value]="quarter">{{quarter}}</mat-option>
+            </mat-select>
+        </mat-form-field>
 
-    <mat-form-field>
-      <mat-select [(value)]="quarterSelected_2" (change)="initChartsData()">
-        <mat-option *ngFor="let quarter of env.cpList" [value]="quarter">{{quarter}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
-  <div class="title">Comparing {{quarterSelected_1}} to {{quarterSelected_2}}</div>
-
-  <div class="charts" *ngIf="shouldRefresh">
-    <div class="chart">
-      <canvas baseChart [data]="dataChart_1" [labels]="dataSelected" [colors]="chartsColors" [chartType]="chartsType" [options]="chart1Options"></canvas>
+        <mat-form-field>
+            <mat-select [(value)]="quarterSelected_2" (change)="initChartsData()">
+            <mat-option *ngFor="let quarter of env.cpList" [value]="quarter">{{quarter}}</mat-option>
+            </mat-select>
+        </mat-form-field>
     </div>
-    <div class="chart">
-      <canvas baseChart [data]="dataChart_2" [labels]="dataSelected" [colors]="chartsColors" [chartType]="chartsType" [options]="chart2Options"></canvas>
-    </div>
-  </div>
 
-  <div class="charts" *ngIf="!shouldRefresh">
-    <div class="chart">
-      <canvas baseChart [data]="dataChart_1" [labels]="dataSelected" [colors]="chartsColors" [chartType]="chartsType" [options]="chart1Options"></canvas>
-    </div>
-    <div class="chart">
-      <canvas baseChart [data]="dataChart_2" [labels]="dataSelected" [colors]="chartsColors" [chartType]="chartsType" [options]="chart2Options"></canvas>
-    </div>
-  </div>
+    <div class="title">Comparing {{quarterSelected_1}} to {{quarterSelected_2}}</div>
 
+    <div class="charts" *ngIf="shouldRefresh">
+        <div class="chart">
+            <canvas baseChart [data]="dataChart_1" [labels]="dataSelected" [colors]="chartsColors" [chartType]="chartsType" [options]="chart1Options"></canvas>
+        </div>
+        <div class="chart">
+            <canvas baseChart [data]="dataChart_2" [labels]="dataSelected" [colors]="chartsColors" [chartType]="chartsType" [options]="chart2Options"></canvas>
+        </div>
+    </div>
 
+    <div class="charts" *ngIf="!shouldRefresh">
+        <div class="chart">
+            <canvas baseChart [data]="dataChart_1" [labels]="dataSelected" [colors]="chartsColors" [chartType]="chartsType" [options]="chart1Options"></canvas>
+        </div>
+        <div class="chart">
+            <canvas baseChart [data]="dataChart_2" [labels]="dataSelected" [colors]="chartsColors" [chartType]="chartsType" [options]="chart2Options"></canvas>
+        </div>
+    </div>
 </div>

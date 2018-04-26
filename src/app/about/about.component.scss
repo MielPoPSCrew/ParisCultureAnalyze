@@ -1,0 +1,44 @@
+.about {
+    margin: 20px 15%;
+
+    .back {
+        font-size: 1.2em;
+        cursor: pointer;
+
+        &:focus {
+            outline: 0;
+        }
+
+        .mat-icon {
+            margin-right: 2px;
+            display: inline-flex;
+            vertical-align: middle;
+            padding-bottom: 3px;
+        }
+    }
+
+    .topic {
+        margin: 20px 0;
+
+        .title {
+            font-weight: bold;
+            font-size: 1.2em;
+            width: 100%;
+            border-bottom: solid 1px #01579B;
+            padding-bottom: 5px;
+        }
+
+        .content {
+            text-align: justify;
+
+            a {
+                text-decoration: none;
+                color: #01579B;
+            }
+
+            .primary {
+                font-weight: bold;
+            }
+        } 
+    }
+}

@@ -8,7 +8,7 @@ import { mockCleanDataCompare } from '../../mocks/mockCleanDataCompare';
 @Component({
     selector: 'app-tab-compare',
     templateUrl: './tab-compare.component.html',
-    styleUrls: ['./tab-compare.component.css']
+    styleUrls: ['./tab-compare.component.scss']
 })
 export class TabCompareComponent implements OnInit {
 

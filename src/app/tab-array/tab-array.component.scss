@@ -1,0 +1,40 @@
+.tab-array {
+    .header {
+        min-height: 64px;
+        padding: 8px 0 10px 0;
+
+        .mat-form-field {
+            font-size: 14px;
+            width: 100%;
+        }
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        min-width: 300px;
+        height: 100vh;
+
+        .mat-table {
+            overflow: auto;
+            height: 60%;
+
+            .mat-column-dp,
+            .mat-column-type {
+                max-width: 100px;
+            }
+
+            .mat-column-coords,
+            .mat-column-link {
+                max-width: 40px;
+            }
+
+            .mat-column-coords a,
+            .mat-column-link a {
+                text-decoration: none;
+                color: #01579B;
+            }
+        }
+    }
+     
+}

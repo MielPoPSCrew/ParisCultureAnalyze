@@ -8,12 +8,9 @@ import { mockCleanDataAnalyze } from '../../mocks/mockCleanDataAnalyze';
 @Component({
     selector: 'app-tab-analyze',
     templateUrl: './tab-analyze.component.html',
-    styleUrls: ['./tab-analyze.component.css']
+    styleUrls: ['./tab-analyze.component.scss']
 })
 export class TabAnalyzeComponent implements OnInit {
-    // @ViewChild('currentChart')
-    // currentChart: BaseChartDirective;
-
     public chartType = 'pie';
     public dataSelected = 'Events';
     public env = environment;
@@ -54,6 +51,7 @@ export class TabAnalyzeComponent implements OnInit {
         this.chartLabels = this.env.cpList;
         this.chartColors = this.env.colorList;
 
+        // TODO : improve in something like this.mockCleanDataAnalyze[this.dataSelected.toLowerCase()]
         switch (this.dataSelected) {
             case 'Events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
             case 'Museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
@@ -139,6 +137,3 @@ export class TabAnalyzeComponent implements OnInit {
 //     }
 //     // console.log('chartLabels', this.chartLabels);
 // }
-
-// console.log('data', this.chartData);
-// console.log('labels', this.chartLabels);

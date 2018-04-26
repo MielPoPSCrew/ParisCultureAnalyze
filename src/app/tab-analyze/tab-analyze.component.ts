@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import { environment } from '../../environments/environment';
 
@@ -20,8 +20,9 @@ export class TabAnalyzeComponent implements OnInit {
     public isSorted = false;
     public shouldRefresh = true;
     public chartColors: any[];
-    public initialData: ParisCultureAnalyse;
     public formattedData: any;
+
+    @Input('initialData') initialData: ParisCultureAnalyse;
 
     constructor(private parisCultureServcice: ParisCultureService) { }
 
@@ -34,19 +35,16 @@ export class TabAnalyzeComponent implements OnInit {
             cinemas: []
         };
 
-        this.parisCultureServcice.getParisCultureAnalyse().subscribe(data => {
-            this.initialData = data;
-            console.log('initialData', this.initialData);
+        console.log('initialData', this.initialData);
 
-            this.initialData.arrondissements.sort(this.sortByPostcode).map(quarter => {
-                this.formattedData.events.push(quarter.events.nbItems);
-                this.formattedData.museums.push(quarter.museums.nbItems);
-                this.formattedData.cinemas.push(quarter.cinemas.nbItems);
-            });
-
-            console.log('formattedData', this.formattedData);
-            this.initChartData();
+        this.initialData.arrondissements.sort(this.sortByPostcode).map(quarter => {
+            this.formattedData.events.push(quarter.events.nbItems);
+            this.formattedData.museums.push(quarter.museums.nbItems);
+            this.formattedData.cinemas.push(quarter.cinemas.nbItems);
         });
+
+        console.log('formattedData', this.formattedData);
+        this.initChartData();
     }
 
     initChartOptions = () => {

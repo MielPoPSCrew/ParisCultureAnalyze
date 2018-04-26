@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
 // mock
 import { mockCleanDataArray } from '../../mocks/mockCleanDataArray';
+
+// Services
+import { ParisCultureAnalyse } from '../services/paris-culture.service';
 
 @Component({
     selector: 'app-tab-array',
@@ -17,6 +20,8 @@ export class TabArrayComponent implements OnInit {
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
+
+    @Input('initialData') initialData: ParisCultureAnalyse;
 
     constructor() { }
 

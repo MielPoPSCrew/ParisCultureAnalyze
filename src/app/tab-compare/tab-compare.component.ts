@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import { environment } from '../../environments/environment';
 
-// mock
-import { mockCleanDataCompare } from '../../mocks/mockCleanDataCompare';
-import { ParisCultureService } from '../services/paris-culture.service';
+// Services
+import { ParisCultureService, ParisCultureAnalyse } from '../services/paris-culture.service';
 
 @Component({
     selector: 'app-tab-compare',
@@ -14,9 +13,9 @@ import { ParisCultureService } from '../services/paris-culture.service';
 export class TabCompareComponent implements OnInit {
 
     public env = environment;
-    public mockCleanDataCompare = mockCleanDataCompare;
     public chartsType = 'pie';
     public dataSelected = ['Events', 'Museums', 'Cinemas'];
+    public eventRatio = 10;
     public quarterSelected_1: string;
     public quarterSelected_2: string;
     public dataChart_1: number[];
@@ -25,15 +24,30 @@ export class TabCompareComponent implements OnInit {
     public chart1Options: any;
     public chart2Options: any;
     public shouldRefresh = true;
+    public formattedData: any;
 
-    constructor() { }
+    @Input('initialData') initialData: ParisCultureAnalyse;
+
+    constructor(private parisCultureServcice: ParisCultureService) { }
 
     ngOnInit() {
         this.chartsColors = this.env.colorList;
         this.quarterSelected_1 = this.env.cpList[0];
         this.quarterSelected_2 = this.env.cpList[1];
+        this.formattedData = {
+            events: [],
+            museums: [],
+            cinemas: []
+        };
 
         this.initChartsOptions();
+
+        this.initialData.arrondissements.sort(this.sortByPostcode).map(quarter => {
+            this.formattedData.events.push(quarter.events.nbItems);
+            this.formattedData.museums.push(quarter.museums.nbItems);
+            this.formattedData.cinemas.push(quarter.cinemas.nbItems);
+        });
+
         this.initChartsData();
     }
 
@@ -88,19 +102,24 @@ export class TabCompareComponent implements OnInit {
             };
         }
 
+        const indexQuarter1 = parseInt(this.quarterSelected_1, 10) - 75001;
+        const indexQuarter2 = parseInt(this.quarterSelected_2, 10) - 75001;
+
+        console.log(this.formattedData);
+
         if (this.dataSelected.includes('Events')) {
-            this.dataChart_1.push(this.mockCleanDataCompare[this.quarterSelected_1].events);
-            this.dataChart_2.push(this.mockCleanDataCompare[this.quarterSelected_2].events);
+            this.dataChart_1.push(this.formattedData.events[indexQuarter1] / this.eventRatio);
+            this.dataChart_2.push(this.formattedData.events[indexQuarter2] / this.eventRatio);
         }
 
         if (this.dataSelected.includes('Museums')) {
-            this.dataChart_1.push(this.mockCleanDataCompare[this.quarterSelected_1].museums);
-            this.dataChart_2.push(this.mockCleanDataCompare[this.quarterSelected_2].museums);
+            this.dataChart_1.push(this.formattedData.museums[indexQuarter1]);
+            this.dataChart_2.push(this.formattedData.museums[indexQuarter2]);
         }
 
         if (this.dataSelected.includes('Cinemas')) {
-            this.dataChart_1.push(this.mockCleanDataCompare[this.quarterSelected_1].cinemas);
-            this.dataChart_2.push(this.mockCleanDataCompare[this.quarterSelected_2].cinemas);
+            this.dataChart_1.push(this.formattedData.cinemas[indexQuarter1]);
+            this.dataChart_2.push(this.formattedData.cinemas[indexQuarter2]);
         }
 
         console.log('initChartsData');
@@ -108,4 +127,5 @@ export class TabCompareComponent implements OnInit {
         console.log(this.dataChart_2);
     }
 
+    sortByPostcode = (a, b) => a.postcode - b.postcode;
 }

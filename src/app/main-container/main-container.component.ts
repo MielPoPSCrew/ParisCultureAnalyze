@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+// Services
+import { ParisCultureService, ParisCultureAnalyse } from '../services/paris-culture.service';
+
 @Component({
     selector: 'app-main-container',
     templateUrl: './main-container.component.html',
@@ -7,8 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainContainerComponent implements OnInit {
 
-    constructor() { }
+    public initialData: ParisCultureAnalyse;
 
-    ngOnInit() { }
+    constructor(private parisCultureServcice: ParisCultureService) { }
+
+    ngOnInit() {
+        this.parisCultureServcice.getParisCultureAnalyse().subscribe(data => {
+            this.initialData = data;
+        });
+     }
 
 }

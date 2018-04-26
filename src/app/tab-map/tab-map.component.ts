@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+// Services
+import { ParisCultureAnalyse } from '../services/paris-culture.service';
 
 @Component({
     selector: 'app-tab-map',
@@ -6,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./tab-map.component.scss']
 })
 export class TabMapComponent implements OnInit {
+
+    @Input('initialData') initialData: ParisCultureAnalyse;
 
     constructor() { }
 

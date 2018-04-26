@@ -16,6 +16,12 @@ import { TabMapComponent } from './tab-map/tab-map.component';
 import { TabCompareComponent } from './tab-compare/tab-compare.component';
 import { AboutComponent } from './about/about.component';
 
+// Providers
+import { CinemaService } from './services/cinema.service';
+import { EventService } from './services/event.service';
+import { MuseumService } from './services/museum.service';
+import { ParisCultureService } from './services/paris-culture.service';
+
 // Modules
 import { ChartsModule } from 'ng2-charts';
 
@@ -30,12 +36,9 @@ import {
     MatPaginatorModule,
     MatInputModule,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
 } from '@angular/material';
-import { CinemaService } from './services/cinema.service';
-import { EventService } from './services/event.service';
-import { MuseumService } from './services/museum.service';
-import { ParisCultureService } from './services/paris-culture.service';
 
 const MATERIAL_MODULES = [
     MatToolbarModule,
@@ -47,7 +50,8 @@ const MATERIAL_MODULES = [
     MatPaginatorModule,
     MatInputModule,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
 ];
 
 const appRoutes: Routes = [

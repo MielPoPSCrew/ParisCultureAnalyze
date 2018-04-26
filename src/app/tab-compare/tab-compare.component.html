@@ -48,4 +48,6 @@
             <canvas baseChart [data]="dataChart_2" [labels]="dataSelected" [colors]="chartsColors" [chartType]="chartsType" [options]="chart2Options"></canvas>
         </div>
     </div>
+
+    <div class="note" *ngIf="eventRatio === 10">Note: events have been divide by 10 here</div>
 </div>

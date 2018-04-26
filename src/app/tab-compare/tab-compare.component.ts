@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 
 // mock
 import { mockCleanDataCompare } from '../../mocks/mockCleanDataCompare';
+import { ParisCultureService } from '../services/paris-culture.service';
 
 @Component({
     selector: 'app-tab-compare',

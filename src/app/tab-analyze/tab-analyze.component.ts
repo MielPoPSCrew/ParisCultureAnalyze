@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import { environment } from '../../environments/environment';
 
-// mock
-import { mockCleanDataAnalyze } from '../../mocks/mockCleanDataAnalyze';
+// Services
+import { ParisCultureService, ParisCultureAnalyse } from '../services/paris-culture.service';
 
 @Component({
     selector: 'app-tab-analyze',
@@ -17,18 +17,36 @@ export class TabAnalyzeComponent implements OnInit {
     public chartLabels: string[];
     public chartData: number[];
     public chartOptions: any;
-    public mockCleanDataAnalyze = mockCleanDataAnalyze;
     public isSorted = false;
     public shouldRefresh = true;
     public chartColors: any[];
+    public initialData: ParisCultureAnalyse;
+    public formattedData: any;
 
-    constructor() { }
+    constructor(private parisCultureServcice: ParisCultureService) { }
 
     ngOnInit() {
         this.chartLabels = this.env.cpList;
         this.chartColors = this.env.colorList;
+        this.formattedData = {
+            events: [],
+            museums: [],
+            cinemas: []
+        };
 
-        this.initChartData();
+        this.parisCultureServcice.getParisCultureAnalyse().subscribe(data => {
+            this.initialData = data;
+            console.log('initialData', this.initialData);
+
+            this.initialData.arrondissements.sort(this.sortByPostcode).map(quarter => {
+                this.formattedData.events.push(quarter.events.nbItems);
+                this.formattedData.museums.push(quarter.museums.nbItems);
+                this.formattedData.cinemas.push(quarter.cinemas.nbItems);
+            });
+
+            console.log('formattedData', this.formattedData);
+            this.initChartData();
+        });
     }
 
     initChartOptions = () => {
@@ -51,12 +69,12 @@ export class TabAnalyzeComponent implements OnInit {
         this.chartLabels = this.env.cpList;
         this.chartColors = this.env.colorList;
 
-        // TODO : improve in something like this.mockCleanDataAnalyze[this.dataSelected.toLowerCase()]
-        switch (this.dataSelected) {
-            case 'Events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
-            case 'Museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
-            case 'Cinemas': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.cinemas); break;
-        }
+        this.chartData = this.formatDataToSort(this.formattedData[this.dataSelected.toLowerCase()]);
+        // switch (this.dataSelected) {
+        //     case 'Events': break;
+        //     case 'Museums': this.chartData = this.formatDataToSort(this.formattedData.museums); break;
+        //     case 'Cinemas': this.chartData = this.formatDataToSort(this.formattedData.cinemas); break;
+        // }
 
         if (this.isSorted) {
             this.chartLabels = [];
@@ -100,40 +118,9 @@ export class TabAnalyzeComponent implements OnInit {
         return newFormat;
     }
 
+    sortByPostcode = (a, b) => a.postcode - b.postcode;
     sortValues = (a, b) => b.data[0] - a.data[0];
     sortLabels = data => { this.chartLabels.push(data.label); };
     sortColors = data => { this.chartColors[0].backgroundColor.push(this.env.cpColorList[data]); };
     flattenObject = data => { this.chartData.push(data.data[0]); };
 }
-
-// DO NOT REMOVE : OLD STUFF
-// if (this.chartType === 'pie' || this.chartType === 'doughnut') {
-//     switch (this.dataSelected) {
-//         case 'events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
-//         case 'museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
-//         case 'cinemas': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.cinemas); break;
-//     }
-//     if (this.isSorted) {
-//         this.chartLabels = [];
-//         this.chartData.sort(this.sortValues).map(this.sortLabels);
-//         const tmpData = this.chartData;
-//         this.chartData = [];
-//         tmpData.map((data) => {
-//             console.log(data);
-//             this.chartData.push(data.data[0]);
-//         });
-//     }
-// }
-// if (this.chartType === 'bar') {
-//     switch (this.dataSelected) {
-//         case 'events': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.events); break;
-//         case 'museums': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.museums); break;
-//         case 'cinemas': this.chartData = this.formatDataToSort(this.mockCleanDataAnalyze.cinemas); break;
-//     }
-
-//     if (this.isSorted) {
-//         this.chartLabels = [];
-//         this.chartData.sort(this.sortValues).map(this.sortLabels);
-//     }
-//     // console.log('chartLabels', this.chartLabels);
-// }

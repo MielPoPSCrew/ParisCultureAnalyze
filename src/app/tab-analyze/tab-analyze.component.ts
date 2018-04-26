@@ -3,7 +3,7 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import { environment } from '../../environments/environment';
 
 // Services
-import { ParisCultureService, ParisCultureAnalyse } from '../services/paris-culture.service';
+import { ParisCultureAnalyse } from '../services/paris-culture.service';
 
 @Component({
     selector: 'app-tab-analyze',
@@ -24,7 +24,7 @@ export class TabAnalyzeComponent implements OnInit {
 
     @Input('initialData') initialData: ParisCultureAnalyse;
 
-    constructor(private parisCultureServcice: ParisCultureService) { }
+    constructor() { }
 
     ngOnInit() {
         this.chartLabels = this.env.cpList;
@@ -35,15 +35,12 @@ export class TabAnalyzeComponent implements OnInit {
             cinemas: []
         };
 
-        console.log('initialData', this.initialData);
-
         this.initialData.arrondissements.sort(this.sortByPostcode).map(quarter => {
             this.formattedData.events.push(quarter.events.nbItems);
             this.formattedData.museums.push(quarter.museums.nbItems);
             this.formattedData.cinemas.push(quarter.cinemas.nbItems);
         });
 
-        console.log('formattedData', this.formattedData);
         this.initChartData();
     }
 
@@ -96,10 +93,6 @@ export class TabAnalyzeComponent implements OnInit {
                 }]
             };
         }
-
-        console.log('data', this.chartData);
-        console.log('labels', this.chartLabels);
-        console.log('colors', this.chartColors);
     }
 
     formatDataToSort = (data) => {

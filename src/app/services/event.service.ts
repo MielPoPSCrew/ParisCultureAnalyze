@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Coordinate } from '../../shared/Coordinate';
 
 export interface Event {
-  title: string;
+  name: string;
   description: string;
   details: string;
   website: string;
@@ -51,7 +51,7 @@ export class EventService {
     const fields = json['fields'];
 
     const event = <Event>{};
-    event.title = fields['title'];
+    event.name = fields['title'];
     event.description = fields['description'];
     event.details = fields['free_text'];
     event.website = fields['link'];

@@ -2,31 +2,33 @@
     <div class="selects">
         <mat-form-field>
             <mat-select [(value)]="chartsType" (change)="initChartsData()">
-            <mat-option value="pie">Pie</mat-option>
-            <mat-option value="doughnut">Doughnut</mat-option>
-            <mat-option value="bar">Bar</mat-option>
+                <mat-option value="pie">Pie</mat-option>
+                <mat-option value="doughnut">Doughnut</mat-option>
+                <mat-option value="bar">Bar</mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field>
             <mat-select [(value)]="dataSelected" (change)="initChartsData()" multiple>
-            <mat-option value="Events">Events</mat-option>
-            <mat-option value="Museums">Museums</mat-option>
-            <mat-option value="Cinemas">Cinemas</mat-option>
+                <mat-option value="Events">Events</mat-option>
+                <mat-option value="Museums">Museums</mat-option>
+                <mat-option value="Cinemas">Cinemas</mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field>
             <mat-select [(value)]="quarterSelected_1" (change)="initChartsData()">
-            <mat-option *ngFor="let quarter of env.cpList" [value]="quarter">{{quarter}}</mat-option>
+                <mat-option *ngFor="let quarter of env.cpList" [value]="quarter">{{quarter}}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field>
             <mat-select [(value)]="quarterSelected_2" (change)="initChartsData()">
-            <mat-option *ngFor="let quarter of env.cpList" [value]="quarter">{{quarter}}</mat-option>
+                <mat-option *ngFor="let quarter of env.cpList" [value]="quarter">{{quarter}}</mat-option>
             </mat-select>
         </mat-form-field>
+
+        <mat-checkbox [(ngModel)]="hasRatio" (change)="initChartsData()">Event Ratio 10</mat-checkbox>
     </div>
 
     <div class="title">Comparing {{quarterSelected_1}} to {{quarterSelected_2}}</div>

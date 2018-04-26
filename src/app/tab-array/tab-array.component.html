@@ -10,24 +10,24 @@
         <ng-container matColumnDef="coords">
             <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
             <mat-cell *matCellDef="let row">
-            <a href="https://www.google.fr/maps/@{{row.coords.y}},{{row.coords.x}},17z" target="_blank">
-                <mat-icon>location_on</mat-icon>
-            </a>
+                <a href="https://www.google.fr/maps/@{{row.coordinate.latitude}},{{row.coordinate.longitude}},17z" target="_blank" *ngIf="row.coordinate.latitude && row.coordinate.longitude">
+                    <mat-icon>location_on</mat-icon>
+                </a>
             </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="link">
             <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
             <mat-cell *matCellDef="let row">
-                <a href="{{row.link}}" target="_blank">
+                <a href="{{row.website}}" target="_blank" *ngIf="row.website">
                     <mat-icon>info_outline</mat-icon>
                 </a>
             </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="title">
-            <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.title}}</mat-cell>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.name}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="type">
@@ -37,17 +37,16 @@
 
         <ng-container matColumnDef="dp">
             <mat-header-cell *matHeaderCellDef mat-sort-header>DP</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.dp}} </mat-cell>
+            <mat-cell *matCellDef="let row">{{row.arrondissment}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="info">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Info</mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.info}} </mat-cell>
+            <mat-cell *matCellDef="let row">{{row.description}}</mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;">
-            </mat-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
 
         <mat-paginator [pageSizeOptions]="[25, 50, 75, 100]"></mat-paginator>

@@ -3,7 +3,7 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 import { environment } from '../../environments/environment';
 
 // Services
-import { ParisCultureService, ParisCultureAnalyse } from '../services/paris-culture.service';
+import { ParisCultureAnalyse } from '../services/paris-culture.service';
 
 @Component({
     selector: 'app-tab-compare',
@@ -15,7 +15,7 @@ export class TabCompareComponent implements OnInit {
     public env = environment;
     public chartsType = 'pie';
     public dataSelected = ['Events', 'Museums', 'Cinemas'];
-    public eventRatio = 10;
+    public hasRatio: boolean;
     public quarterSelected_1: string;
     public quarterSelected_2: string;
     public dataChart_1: number[];
@@ -28,12 +28,14 @@ export class TabCompareComponent implements OnInit {
 
     @Input('initialData') initialData: ParisCultureAnalyse;
 
-    constructor(private parisCultureServcice: ParisCultureService) { }
+    constructor() { }
 
     ngOnInit() {
         this.chartsColors = this.env.colorList;
         this.quarterSelected_1 = this.env.cpList[0];
         this.quarterSelected_2 = this.env.cpList[1];
+        this.hasRatio = true;
+
         this.formattedData = {
             events: [],
             museums: [],
@@ -104,12 +106,11 @@ export class TabCompareComponent implements OnInit {
 
         const indexQuarter1 = parseInt(this.quarterSelected_1, 10) - 75001;
         const indexQuarter2 = parseInt(this.quarterSelected_2, 10) - 75001;
-
-        console.log(this.formattedData);
+        const eventRatio = this.hasRatio ? 10 : 1;
 
         if (this.dataSelected.includes('Events')) {
-            this.dataChart_1.push(this.formattedData.events[indexQuarter1] / this.eventRatio);
-            this.dataChart_2.push(this.formattedData.events[indexQuarter2] / this.eventRatio);
+            this.dataChart_1.push(this.formattedData.events[indexQuarter1] / eventRatio);
+            this.dataChart_2.push(this.formattedData.events[indexQuarter2] / eventRatio);
         }
 
         if (this.dataSelected.includes('Museums')) {
@@ -121,10 +122,6 @@ export class TabCompareComponent implements OnInit {
             this.dataChart_1.push(this.formattedData.cinemas[indexQuarter1]);
             this.dataChart_2.push(this.formattedData.cinemas[indexQuarter2]);
         }
-
-        console.log('initChartsData');
-        console.log(this.dataChart_1);
-        console.log(this.dataChart_2);
     }
 
     sortByPostcode = (a, b) => a.postcode - b.postcode;

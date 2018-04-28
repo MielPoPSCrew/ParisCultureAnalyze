@@ -37,9 +37,9 @@ export class TabArrayComponent implements OnInit {
             // console.log('cinemas', quarter.cinemas.items);
 
             // TODO : deal with Event/Museum/Item types
-            quarter.events.items.map(item => { item.type = 'event'; });
-            quarter.museums.items.map(item => { item.type = 'museum'; });
-            quarter.cinemas.items.map(item => { item.type = 'cinema'; });
+            // quarter.events.items.map(item => { item.type = 'event'; });
+            // quarter.museums.items.map(item => { item.type = 'museum'; });
+            // quarter.cinemas.items.map(item => { item.type = 'cinema'; });
 
             this.formattedData = [
                 ...this.formattedData,

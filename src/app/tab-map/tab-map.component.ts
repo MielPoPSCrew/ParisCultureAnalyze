@@ -25,44 +25,52 @@ export class TabMapComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        // Show  the google map on the center of Paris
-        const markers = [],
-            mapProp = {
+        const scaledSize = new google.maps.Size(20, 20),
+              markers    = [],
+              mapProp    = {
                 center: new google.maps.LatLng(48.866667, 2.333333),
                 zoom: 12,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
-            },
-            images = {
+               },
+              images     = {
                 museum: {
-                    url: 'assets/images/museum.svg',
-                    size: new google.maps.Size(50, 50),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(25, 50)
+                    url       : 'assets/images/museum.svg',
+                    size      : new google.maps.Size(50, 50),
+                    scaledSize: scaledSize,
+                    origin    : new google.maps.Point(0, 0),
+                    anchor    : new google.maps.Point(25, 50)
                 },
                 cinema: {
-                    url: 'assets/images/movie-theater.svg',
-                    size: new google.maps.Size(50, 50),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(25, 50)
+                    url       : 'assets/images/movie-theater.svg',
+                    size      : new google.maps.Size(50, 50),
+                    scaledSize: scaledSize,
+                    origin    : new google.maps.Point(0, 0),
+                    anchor    : new google.maps.Point(25, 50)
                 },
                 event: {
-                    url: 'assets/images/embassy.svg',
-                    size: new google.maps.Size(50, 50),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(0, 50)
+                    url       : 'assets/images/embassy.svg',
+                    size      : new google.maps.Size(50, 50),
+                    scaledSize: scaledSize,
+                    origin    : new google.maps.Point(0, 0),
+                    anchor    : new google.maps.Point(0, 50)
                 }
-            };
+              };
 
         this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
 
         _forEach(mockCleanData.data, (event) => {
             const marker = new google.maps.Marker({
-                position: {lat: event.coords.y, lng: event.coords.x},
-                title: event.title,
-                icon: images[event.type]
-            });
+                    position: {lat: event.coords.y, lng: event.coords.x},
+                    title: event.title,
+                    icon: images[event.type],
+                    map: this.map
+                }),
+                infowindow = new google.maps.InfoWindow({
+                    content: event.info
+                });
 
-            marker.setMap(this.map);
+            marker.addListener('click', () => infowindow.open(this.map, marker));
+
             markers.push(marker);
         });
 

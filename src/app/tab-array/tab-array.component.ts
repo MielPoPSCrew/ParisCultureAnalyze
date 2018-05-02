@@ -35,7 +35,8 @@ export class TabArrayComponent implements OnInit {
 
             // TODO : deal with description for each type
             quarter.events.items.map(item => {
-                console.log(item);
+                // Léo commente tes consol.log stp :p
+                // console.log(item);
                 const nItem = <ArrayItem>{};
 
                 nItem.name = item.name;

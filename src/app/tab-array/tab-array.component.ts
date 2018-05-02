@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-
-// mock
-import { mockCleanDataArray } from '../../mocks/mockCleanDataArray';
+import { Coordinate } from '../../shared/Coordinate';
 
 // Services
 import { ParisCultureAnalyse } from '../services/paris-culture.service';
@@ -16,7 +14,6 @@ export class TabArrayComponent implements OnInit {
 
     public displayedColumns = ['coords', 'link', 'name', 'type', 'dp', 'info'];
     public dataSource: MatTableDataSource<any>;
-    public mockCleanDataArray = mockCleanDataArray;
     public formattedData: any[];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,17 +33,46 @@ export class TabArrayComponent implements OnInit {
             // console.log('museums', quarter.museums.items);
             // console.log('cinemas', quarter.cinemas.items);
 
-            // TODO : deal with Event/Museum/Item types
-            // quarter.events.items.map(item => { item.type = 'event'; });
-            // quarter.museums.items.map(item => { item.type = 'museum'; });
-            // quarter.cinemas.items.map(item => { item.type = 'cinema'; });
+            // TODO : deal with description for each type
+            quarter.events.items.map(item => {
+                console.log(item);
+                const nItem = <ArrayItem>{};
 
-            this.formattedData = [
-                ...this.formattedData,
-                ...quarter.events.items,
-                ...quarter.museums.items,
-                ...quarter.cinemas.items
-            ];
+                nItem.name = item.name;
+                nItem.description = item.description;
+                nItem.address = item.address;
+                nItem.coordinate = item.coordinate;
+                nItem.arrondissment = item.arrondissment;
+                nItem.type = 'event';
+
+                this.formattedData.push(nItem);
+            });
+            quarter.museums.items.map(item => {
+                const nItem = <ArrayItem>{};
+
+                nItem.name = item.name;
+                nItem.description = '';
+                // nItem.description = item.description;
+                nItem.address = item.address;
+                nItem.coordinate = item.coordinate;
+                nItem.arrondissment = item.arrondissment;
+                nItem.type = 'museum';
+
+                this.formattedData.push(nItem);
+            });
+            quarter.cinemas.items.map(item => {
+                const nItem = <ArrayItem>{};
+
+                nItem.name = item.name;
+                nItem.description = '';
+                // nItem.description = item.description;
+                nItem.address = item.address;
+                nItem.coordinate = item.coordinate;
+                nItem.arrondissment = item.arrondissment;
+                nItem.type = 'cinema';
+
+                this.formattedData.push(nItem);
+            });
         });
 
         // console.log(this.formattedData);
@@ -66,4 +92,13 @@ export class TabArrayComponent implements OnInit {
         filterValue = filterValue.toLowerCase();
         this.dataSource.filter = filterValue;
     }
+}
+
+interface ArrayItem {
+    name: string;
+    description: string;
+    address: string;
+    coordinate: Coordinate;
+    arrondissment: string;
+    type: string;
 }

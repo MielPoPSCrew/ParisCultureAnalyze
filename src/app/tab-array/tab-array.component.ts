@@ -14,47 +14,45 @@ export class TabArrayComponent implements OnInit {
 
     public displayedColumns = ['coords', 'link', 'name', 'type', 'dp', 'info'];
     public dataSource: MatTableDataSource<any>;
-    public formattedData: any[];
+    public formattedData: ArrayItem[];
+    private dateOptions = {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    };
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
     @Input('initialData') initialData: ParisCultureAnalyse;
 
-    constructor() { }
+    constructor() {
+        this.formattedData = [];
+    }
 
     ngOnInit() {
-        this.formattedData = [];
-
-        // TODO : map data with relevant fields (ex: description is nb seats + wathever)
-        // Remove all useless fields because they will be used by filtering function
         this.initialData.arrondissements.map(quarter => {
-            // console.log('events', quarter.events.items);
-            // console.log('museums', quarter.museums.items);
-            // console.log('cinemas', quarter.cinemas.items);
-
-            // TODO : deal with description for each type
             quarter.events.items.map(item => {
-                // Léo commente tes consol.log stp :p
-                // console.log(item);
                 const nItem = <ArrayItem>{};
 
                 nItem.name = item.name;
                 nItem.description = item.description;
                 nItem.address = item.address;
+                nItem.website = item.website;
                 nItem.coordinate = item.coordinate;
                 nItem.arrondissment = item.arrondissment;
                 nItem.type = 'event';
-
+                nItem.date = item.periode.start.toLocaleDateString('fr-FR', this.dateOptions);
                 this.formattedData.push(nItem);
             });
             quarter.museums.items.map(item => {
                 const nItem = <ArrayItem>{};
 
                 nItem.name = item.name;
-                nItem.description = '';
-                // nItem.description = item.description;
+                nItem.description = item.address;
                 nItem.address = item.address;
+                nItem.website = item.website;
                 nItem.coordinate = item.coordinate;
                 nItem.arrondissment = item.arrondissment;
                 nItem.type = 'museum';
@@ -63,10 +61,17 @@ export class TabArrayComponent implements OnInit {
             });
             quarter.cinemas.items.map(item => {
                 const nItem = <ArrayItem>{};
+                console.log(item);
 
                 nItem.name = item.name;
-                nItem.description = '';
-                // nItem.description = item.description;
+                nItem.description = item.address
+                    + ' - '
+                    + item.rooms
+                    + ' salle'
+                    + (item.rooms > 1 ? 's' : '')
+                    + ' - '
+                    + item.places
+                    + ' places';
                 nItem.address = item.address;
                 nItem.coordinate = item.coordinate;
                 nItem.arrondissment = item.arrondissment;
@@ -76,7 +81,6 @@ export class TabArrayComponent implements OnInit {
             });
         });
 
-        // console.log(this.formattedData);
         this.dataSource = new MatTableDataSource(this.formattedData);
     }
 
@@ -86,8 +90,6 @@ export class TabArrayComponent implements OnInit {
         this.dataSource.sort = this.sort;
     }
 
-    // TODO : deal with filters because they doesn't work properly
-    // It's certainly linked to irrelevant fields
     applyFilter(filterValue: string) {
         filterValue = filterValue.trim();
         filterValue = filterValue.toLowerCase();
@@ -99,7 +101,9 @@ interface ArrayItem {
     name: string;
     description: string;
     address: string;
+    website?: string;
     coordinate: Coordinate;
     arrondissment: string;
     type: string;
+    date?: string;
 }

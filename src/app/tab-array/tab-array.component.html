@@ -42,7 +42,11 @@
 
         <ng-container matColumnDef="info">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Info</mat-header-cell>
-            <mat-cell *matCellDef="let row">{{row.description}}</mat-cell>
+            <mat-cell *matCellDef="let row">
+                <span class="date">{{row.date}}</span>
+                <mat-divider *ngIf="row.date"></mat-divider>
+                {{row.description}}
+            </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

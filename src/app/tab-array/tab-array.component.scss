@@ -18,6 +18,25 @@
         .mat-table {
             overflow: auto;
             height: 60%;
+            
+            .mat-row {
+                &:hover {
+                    background: #F9F9F9;
+                }
+
+                .mat-cell {
+                    padding: 3px 0;
+    
+                    .mat-divider {
+                        margin-top: 4px;
+                        margin-bottom: 4px;
+                    }
+
+                    .date {
+                        text-transform: uppercase;
+                    } 
+                }
+            }
 
             .mat-column-dp,
             .mat-column-type {

@@ -1,7 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {ViewChild} from '@angular/core';
+import {Component, OnInit, Input, ViewChild, NgZone} from '@angular/core';
+import {Event} from '../services/event.service';
 import {} from '@types/googlemaps';
 import _forEach from 'lodash-es/forEach';
+import _concat from 'lodash-es/concat';
+import _inRange from 'lodash-es/inRange';
 
 // Services
 import {ParisCultureAnalyse} from '../services/paris-culture.service';
@@ -15,11 +17,13 @@ import {ParisCultureAnalyse} from '../services/paris-culture.service';
 export class TabMapComponent implements OnInit {
     @Input('initialData') initialData: ParisCultureAnalyse;
     @ViewChild('googleMapView') gmapElement: any;
+    @ViewChild('eventsDetails') eventsDetailsElement: any;
 
     map: google.maps.Map;
     images: Object;
+    events: Event[];
 
-    constructor() {
+    constructor(private _ngZone: NgZone) {
         const scaledSize = new google.maps.Size(20, 20);
 
         this.images     = {
@@ -109,11 +113,40 @@ export class TabMapComponent implements OnInit {
             });
         });
 
-        const markerCluster = new MarkerClusterer(
+        const markerClusterer = new MarkerClusterer(
             this.map,
             markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
         );
+
+        google.maps.event.addListener(markerClusterer, 'clusterclick', (cluster) => {
+            this._ngZone.run(() => {
+                if (cluster.markerClusterer_.prevZoom_ === 22) {
+                    const delta  = 0.00001;
+
+                    let events = [];
+
+                    data.forEach(
+                        arrondissment => {
+                            const filteredEvents = (arrondissment.events.items.filter(event => {
+                                return _inRange(cluster.center_.lng(), event.coordinate.longitude - delta, event.coordinate.longitude + delta) &&
+                                    _inRange(cluster.center_.lat(), event.coordinate.latitude - delta, event.coordinate.latitude + delta);
+                            }));
+
+                            if (filteredEvents.length > 0) {
+                                events = _concat(events, filteredEvents);
+                            }
+                        }
+                    );
+
+                    console.log(events);
+                    this.events = events;
+
+                    this.gmapElement.nativeElement.style.width          = '80%';
+                    this.eventsDetailsElement.nativeElement.style.width = '20%';
+                }
+            });
+        });
     }
 
     addMarker(coord, title, icon, info) {
@@ -130,5 +163,13 @@ export class TabMapComponent implements OnInit {
         marker.addListener('click', () => infowindow.open(this.map, marker));
 
         return marker;
+    }
+
+    /**
+     * Close the events details view and put he Google Map in full screen
+     */
+    closeEventsDetails() {
+        this.gmapElement.nativeElement.style.width          = '100%';
+        this.eventsDetailsElement.nativeElement.style.width = '0';
     }
 }

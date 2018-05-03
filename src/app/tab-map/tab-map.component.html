@@ -1,3 +1,22 @@
 <div class="tab-map">
     <div #googleMapView id="google-map-view"></div>
+    <div #eventsDetails id="events-details">
+        <mat-toolbar>
+            <mat-icon (click)="closeEventsDetails()" class="icon events-details-close">close</mat-icon>
+            <span class="events-details-title center">Events</span>
+        </mat-toolbar>
+        <mat-expansion-panel *ngFor="let event of events">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span>{{ event.name }}</span>
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{ event.description }}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <p>{{ event.details }}</p>
+
+        </mat-expansion-panel>
+    </div>
 </div>

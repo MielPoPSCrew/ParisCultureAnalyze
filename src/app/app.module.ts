@@ -14,6 +14,7 @@ import { TabArrayComponent } from './tab-array/tab-array.component';
 import { TabAnalyzeComponent } from './tab-analyze/tab-analyze.component';
 import { TabMapComponent } from './tab-map/tab-map.component';
 import { TabCompareComponent } from './tab-compare/tab-compare.component';
+import { TabExportComponent } from './tab-export/tab-export.component';
 import { AboutComponent } from './about/about.component';
 
 // Providers
@@ -74,7 +75,8 @@ const appRoutes: Routes = [
         TabAnalyzeComponent,
         TabMapComponent,
         TabCompareComponent,
-        AboutComponent
+        AboutComponent,
+        TabExportComponent
     ],
     imports: [
         RouterModule.forRoot(appRoutes),

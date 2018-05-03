@@ -22,6 +22,12 @@ export class TabMapComponent implements OnInit {
     map: google.maps.Map;
     images: Object;
     events: Event[];
+    private dateOptions = {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    };
 
     constructor(private _ngZone: NgZone) {
         const scaledSize = new google.maps.Size(20, 20);
@@ -142,8 +148,8 @@ export class TabMapComponent implements OnInit {
                     console.log(events);
                     this.events = events;
 
-                    this.gmapElement.nativeElement.style.width          = '80%';
-                    this.eventsDetailsElement.nativeElement.style.width = '20%';
+                    this.gmapElement.nativeElement.style.width          = '70%';
+                    this.eventsDetailsElement.nativeElement.style.width = '30%';
                 }
             });
         });
@@ -163,6 +169,10 @@ export class TabMapComponent implements OnInit {
         marker.addListener('click', () => infowindow.open(this.map, marker));
 
         return marker;
+    }
+
+    renderDate(date: Date) {
+        return date.toLocaleDateString('fr-FR', this.dateOptions);
     }
 
     /**

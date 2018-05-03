@@ -3,19 +3,18 @@
     <div #eventsDetails id="events-details">
         <mat-toolbar>
             <mat-icon (click)="closeEventsDetails()" class="icon events-details-close">close</mat-icon>
-            <span class="events-details-title center">Events</span>
+            <span class="events-details-title center">Manifestations culturelles</span>
         </mat-toolbar>
         <mat-expansion-panel *ngFor="let event of events">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    <span>{{ event.name }}</span>
+                    <span>{{event.name}}</span>
                 </mat-panel-title>
-                <mat-panel-description>
-                    {{ event.description }}
-                </mat-panel-description>
             </mat-expansion-panel-header>
 
-            <p>{{ event.details }}</p>
+            <p class="date">{{renderDate(event.periode.start)}}</p>
+            <mat-divider *ngIf="event.description"></mat-divider>
+            <p>{{event.description}}</p>
 
         </mat-expansion-panel>
     </div>

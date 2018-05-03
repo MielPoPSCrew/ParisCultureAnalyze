@@ -145,7 +145,6 @@ export class TabMapComponent implements OnInit {
                         }
                     );
 
-                    console.log(events);
                     this.events = events;
 
                     this.gmapElement.nativeElement.style.width          = '70%';

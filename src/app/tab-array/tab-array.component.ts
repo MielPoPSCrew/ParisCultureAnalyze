@@ -61,7 +61,6 @@ export class TabArrayComponent implements OnInit {
             });
             quarter.cinemas.items.map(item => {
                 const nItem = <ArrayItem>{};
-                console.log(item);
 
                 nItem.name = item.name;
                 nItem.description = item.address

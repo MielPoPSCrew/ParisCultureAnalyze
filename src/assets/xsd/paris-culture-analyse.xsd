@@ -1,0 +1,96 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="arrondissements" type="arrondissementsType"/>
+
+  <xs:complexType name="coordinateType">
+    <xs:sequence>
+      <xs:element type="xs:decimal" name="latitude"/>
+      <xs:element type="xs:decimal" name="longitude"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="cinemaType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name"/>
+      <xs:element type="xs:string" name="address"/>
+      <xs:element type="coordinateType" name="coordinate"/>
+    </xs:sequence>
+    <xs:attribute type="xs:integer" name="rooms"/>
+    <xs:attribute type="xs:integer" name="places"/>
+  </xs:complexType>
+
+  <xs:complexType name="cinemasType">
+    <xs:sequence>
+      <xs:element type="cinemaType" name="cinema"/>
+    </xs:sequence>
+    <xs:attribute type="xs:integer" name="total"/>
+  </xs:complexType>
+
+  <xs:complexType name="periodeType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="start"/>
+      <xs:element type="xs:string" name="end"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="keywordsType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="keyword"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="eventType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name"/>
+      <xs:element type="xs:string" name="description"/>
+      <xs:element type="xs:string" name="details"/>
+      <xs:element type="xs:string" name="website"/>
+      <xs:element type="xs:string" name="place"/>
+      <xs:element type="xs:string" name="address"/>
+      <xs:element type="coordinateType" name="coordinate"/>
+      <xs:element type="periodeType" name="periode"/>
+      <xs:element type="keywordsType" name="keywords"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="eventsType">
+    <xs:sequence>
+      <xs:element type="eventType" name="event"/>
+    </xs:sequence>
+    <xs:attribute type="xs:integer" name="total"/>
+  </xs:complexType>
+
+  <xs:complexType name="museumType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="name"/>
+      <xs:element type="xs:string" name="website"/>
+      <xs:element type="xs:string" name="address"/>
+      <xs:element type="coordinateType" name="coordinate"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="museumsType">
+    <xs:sequence>
+      <xs:element type="museumType" name="museum"/>
+    </xs:sequence>
+    <xs:attribute type="xs:integer" name="total"/>
+  </xs:complexType>
+
+  <xs:complexType name="arrondissementType">
+    <xs:sequence>
+      <xs:element type="cinemasType" name="cinemas"/>
+      <xs:element type="eventsType" name="events"/>
+      <xs:element type="musentegerumsType" name="museums"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="postcode"/>
+    <xs:attribute type="xs:integer" name="total"/>
+  </xs:complexType>
+
+  <xs:complexType name="arrondissementsType">
+    <xs:sequence>
+      <xs:element type="arrondissementType" name="arrondissement"/>
+    </xs:sequence>
+    <xs:attribute type="xs:long" name="exportDate"/>
+  </xs:complexType>
+
+</xs:schema>

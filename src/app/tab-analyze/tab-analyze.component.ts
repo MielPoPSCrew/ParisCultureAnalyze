@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
+
+// Assets
 import { environment } from '../../environments/environment';
 
 // Services
@@ -65,11 +67,6 @@ export class TabAnalyzeComponent implements OnInit {
         this.chartColors = this.env.colorList;
 
         this.chartData = this.formatDataToSort(this.formattedData[this.dataSelected.toLowerCase()]);
-        // switch (this.dataSelected) {
-        //     case 'Events': break;
-        //     case 'Museums': this.chartData = this.formatDataToSort(this.formattedData.museums); break;
-        //     case 'Cinemas': this.chartData = this.formatDataToSort(this.formattedData.cinemas); break;
-        // }
 
         if (this.isSorted) {
             this.chartLabels = [];

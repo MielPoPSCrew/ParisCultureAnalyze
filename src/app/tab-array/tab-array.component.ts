@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+
+// Assets
 import { Coordinate } from '../../shared/Coordinate';
 
 // Services

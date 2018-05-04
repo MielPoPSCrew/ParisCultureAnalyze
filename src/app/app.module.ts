@@ -41,7 +41,8 @@ import {
     MatIconModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule
 } from '@angular/material';
 
 const MATERIAL_MODULES = [
@@ -57,7 +58,8 @@ const MATERIAL_MODULES = [
     MatIconModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule
 ];
 
 const appRoutes: Routes = [

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BaseChartDirective } from 'ng2-charts/ng2-charts';
+
+// Assets
 import { environment } from '../../environments/environment';
 
 // Services

@@ -1,3 +1,31 @@
 <div class="tab-export" *ngIf="initialData">
-    TODO export
+    <div class="filters">
+        <div class="quarters">
+            <div class="title">QUARTERS</div>
+            <mat-checkbox *ngFor="let cp of env.cpList" [checked]="isSelected(cp, selectedCp)" (change)="toggleCpCheckbox(cp)">{{cp}}</mat-checkbox>
+        </div>
+    
+        <div class="types">
+            <div class="title">TYPES</div>
+            <mat-checkbox *ngFor="let type of env.typeList" [checked]="isSelected(type, selectedType)" (change)="toggleTypeCheckbox(type)">{{type}}</mat-checkbox>
+        </div>
+    
+        <div class="detail">
+            <div class="title">DETAIL</div>
+    
+            <div class="detail-cinemas" *ngIf="isSelected('Cinemas', selectedType)">
+                Detail cine
+            </div>
+    
+            <div class="detail-events" *ngIf="isSelected('Events', selectedType)">
+                Detail eventss
+            </div>
+        </div>
+    </div>
+
+    <div class="button">
+        <button mat-fab>
+            <mat-icon aria-label="download xml" (click)="download()">vertical_align_bottom</mat-icon>
+        </button>
+    </div>
 </div>

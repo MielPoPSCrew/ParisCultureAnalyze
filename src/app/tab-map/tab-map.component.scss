@@ -16,7 +16,7 @@ $map-height: 80vh;
     width: 0;
     height: $map-height;
     transition: width $transition-time;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     .events-details-close {
       cursor: pointer;
@@ -32,6 +32,7 @@ $map-height: 80vh;
 
       .date {
         text-transform: uppercase;
+        font-weight: bold;
       }
     }
   }

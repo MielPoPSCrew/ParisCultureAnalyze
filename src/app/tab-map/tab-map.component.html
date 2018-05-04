@@ -1,4 +1,19 @@
 <div class="tab-map">
+    <div class="selects">
+        <mat-form-field>
+            <mat-select [(value)]="eventsType" (change)="refreshMarkers()" multiple>
+                <mat-option value="Events">Events</mat-option>
+                <mat-option value="Museums">Museums</mat-option>
+                <mat-option value="Cinemas">Cinemas</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select [(value)]="quarters" (change)="refreshMarkers()" multiple>
+                <mat-option *ngFor="let quarter of env.cpList" [value]="quarter">{{quarter}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
     <div #googleMapView id="google-map-view"></div>
     <div #eventsDetails id="events-details">
         <mat-toolbar>

@@ -22,6 +22,7 @@ import { CinemaService } from './services/cinema.service';
 import { EventService } from './services/event.service';
 import { MuseumService } from './services/museum.service';
 import { ParisCultureService } from './services/paris-culture.service';
+import { XmlExportService } from './services/xml-export.service';
 
 // Modules
 import { ChartsModule } from 'ng2-charts';
@@ -91,7 +92,8 @@ const appRoutes: Routes = [
       CinemaService,
       EventService,
       MuseumService,
-      ParisCultureService
+      ParisCultureService,
+      XmlExportService,
     ],
     bootstrap: [AppComponent]
 })

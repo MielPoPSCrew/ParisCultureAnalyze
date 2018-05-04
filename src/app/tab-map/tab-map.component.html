@@ -1,6 +1,6 @@
 <div class="tab-map">
     <div class="selects">
-        <mat-form-field>
+        <mat-form-field class="select-container">
             <mat-select [(value)]="eventsType" (change)="refreshMarkers()" multiple>
                 <mat-option value="Events">Events</mat-option>
                 <mat-option value="Museums">Museums</mat-option>
@@ -8,7 +8,7 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="select-container">
             <mat-select [(value)]="quarters" (change)="refreshMarkers()" multiple>
                 <mat-option *ngFor="let quarter of env.cpList" [value]="quarter">{{quarter}}</mat-option>
             </mat-select>

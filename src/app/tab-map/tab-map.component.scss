@@ -1,8 +1,20 @@
 $transition-time: 1s;
-$map-height: 80vh;
+$map-height: 75vh;
 
 .tab-map {
   overflow-x: hidden;
+
+  .selects {
+    display: flex;
+
+    .select-container {
+      flex: 1;
+
+      &:first-child {
+        padding-right: 1em;
+      }
+    }
+  }
 
   #google-map-view {
     float: left;

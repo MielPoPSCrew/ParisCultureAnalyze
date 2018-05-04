@@ -6,15 +6,30 @@ import { Museum } from './museum.service';
 import { Arrondissement, ParisCultureAnalyse } from './paris-culture.service';
 import * as jsontoxml from 'jsontoxml';
 import * as xmlformater from 'xml-formatter';
+import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 
 @Injectable()
 export class XmlExportService {
 
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer) { }
 
+  /**
+   * Return a safe url to be used like in this example :
+   * <a [href]="safeUrl" download="export.xml">click to download</a>
+   * @param xml an XML string
+   */
+  public getXmlAsDownlodableFile(xml: string): SafeUrl {
+    const blob: Blob = new Blob([xml], { type: 'text/xml' });
+    return this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
+  }
+
+  /**
+   * Return a pretty formated XML string of data.
+   * @param data An instance of ParisCultureAnalyse
+   */
   public getParisCultureAnalyseAsXml(data: ParisCultureAnalyse): string {
     const jsonXml = this.getParisCultureAnalyseAsJsonXml(data);
-    const xml = jsontoxml(jsonXml, true);
+    const xml = jsontoxml(jsonXml, { escape: true, xmlHeader: true});
     return xmlformater(xml);
   }
 

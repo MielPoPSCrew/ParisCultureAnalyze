@@ -37,7 +37,7 @@ export class TabExportComponent implements OnInit {
     }
 
     download() {
-        console.log(this.filterData);
+        console.log(this.initialData);
         const xml = this.xmlExportService.getParisCultureAnalyseAsXml(this.filteredData);
         this.downloadXMLFile(xml, 'XMLProjectData_' +  new Date().getTime() + '.xml', 'text/plain');
     }
@@ -87,17 +87,17 @@ export class TabExportComponent implements OnInit {
     filterByType = quarter => {
         if (!this.selectedType.includes('Events')) {
             quarter.nbItems -= quarter.events.nbItems;
-            quarter.events = {};
+            quarter.events = { nbItems: 0, items: [] };
         }
 
         if (!this.selectedType.includes('Cinemas')) {
             quarter.nbItems -= quarter.cinemas.nbItems;
-            quarter.cinemas = {};
+            quarter.cinemas = { nbItems: 0, items: [] };
         }
 
         if (!this.selectedType.includes('Museums')) {
             quarter.nbItems -= quarter.museums.nbItems;
-            quarter.museums = {};
+            quarter.museums = { nbItems: 0, items: [] };
         }
 
         return quarter;

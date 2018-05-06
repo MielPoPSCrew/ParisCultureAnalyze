@@ -28,7 +28,6 @@
             </mat-select>
         </mat-form-field>
 
-        <mat-checkbox [(ngModel)]="hasRatio" (change)="initChartsData()">Event Ratio 10</mat-checkbox>
     </div>
 
     <div class="title">Comparing {{quarterSelected_1}} to {{quarterSelected_2}}</div>
@@ -51,5 +50,4 @@
         </div>
     </div>
 
-    <div class="note" *ngIf="eventRatio === 10">Note: events have been divide by 10 here</div>
 </div>

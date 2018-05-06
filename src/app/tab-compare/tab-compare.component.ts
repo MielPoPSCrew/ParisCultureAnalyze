@@ -15,7 +15,6 @@ export class TabCompareComponent implements OnInit {
     public env = environment;
     public chartsType = 'pie';
     public dataSelected = ['Events', 'Museums', 'Cinemas'];
-    public hasRatio: boolean;
     public quarterSelected_1: string;
     public quarterSelected_2: string;
     public dataChart_1: number[];
@@ -34,7 +33,6 @@ export class TabCompareComponent implements OnInit {
         this.chartsColors = this.env.colorList;
         this.quarterSelected_1 = this.env.cpList[0];
         this.quarterSelected_2 = this.env.cpList[1];
-        this.hasRatio = true;
 
         this.formattedData = {
             events: [],
@@ -106,11 +104,10 @@ export class TabCompareComponent implements OnInit {
 
         const indexQuarter1 = parseInt(this.quarterSelected_1, 10) - 75001;
         const indexQuarter2 = parseInt(this.quarterSelected_2, 10) - 75001;
-        const eventRatio = this.hasRatio ? 10 : 1;
 
         if (this.dataSelected.includes('Events')) {
-            this.dataChart_1.push(this.formattedData.events[indexQuarter1] / eventRatio);
-            this.dataChart_2.push(this.formattedData.events[indexQuarter2] / eventRatio);
+            this.dataChart_1.push(this.formattedData.events[indexQuarter1]);
+            this.dataChart_2.push(this.formattedData.events[indexQuarter2]);
         }
 
         if (this.dataSelected.includes('Museums')) {

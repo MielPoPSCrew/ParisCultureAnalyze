@@ -14,11 +14,32 @@
             <div class="title">DETAIL</div>
     
             <div class="detail-cinemas" *ngIf="isSelected('Cinemas', selectedType)">
-                Detail cine
+                <div class="header">
+                    Cinéma
+                </div>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Min rooms" value="0">
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Min seats" value="0">
+                </mat-form-field>   
             </div>
     
             <div class="detail-events" *ngIf="isSelected('Events', selectedType)">
-                Detail eventss
+                <div class="header">
+                    Events
+                </div>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="dateStart" placeholder="Start date">
+                    <mat-datepicker-toggle matSuffix [for]="dateStart"></mat-datepicker-toggle>
+                    <mat-datepicker #dateStart></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="dateEnd" placeholder="End date">
+                    <mat-datepicker-toggle matSuffix [for]="dateEnd"></mat-datepicker-toggle>
+                    <mat-datepicker #dateEnd></mat-datepicker>
+                </mat-form-field>
             </div>
         </div>
     </div>

@@ -75,8 +75,6 @@ export class TabExportComponent implements OnInit {
         this.filteredData.arrondissements = this.filteredData.arrondissements.filter(this.filterByPostcode).map(this.filterByType);
 
         console.log(this.filteredData);
-        console.log('initialData', this.initialData);
-        console.log('selectedType', this.selectedType);
     }
 
     isSelected(item: string, list: string[]) {

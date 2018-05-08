@@ -43,7 +43,8 @@ import {
     MatExpansionModule,
     MatDividerModule,
     MatButtonModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatNativeDateModule
 } from '@angular/material';
 
 const MATERIAL_MODULES = [
@@ -61,7 +62,8 @@ const MATERIAL_MODULES = [
     MatExpansionModule,
     MatDividerModule,
     MatButtonModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatNativeDateModule
 ];
 
 const appRoutes: Routes = [

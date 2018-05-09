@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 // Assets
 import { environment } from '../../environments/environment';
@@ -9,6 +9,7 @@ import { XmlExportService } from '../services/xml-export.service';
 
 // Lodash
 import _cloneDeep from 'lodash-es/cloneDeep';
+import { MatDatepicker } from '@angular/material';
 
 @Component({
     selector: 'app-tab-export',
@@ -21,7 +22,12 @@ export class TabExportComponent implements OnInit {
     public filteredData: ParisCultureAnalyse;
     public selectedCp: string[];
     public selectedType: string[];
+    public minRooms: number;
+    public minSeats: number;
+    public dateStart: Date;
+    public dateEnd: Date;
 
+    // tslint:disable-next-line:no-input-rename
     @Input('initialData') initialData: ParisCultureAnalyse;
 
     constructor(private xmlExportService: XmlExportService) {
@@ -33,16 +39,25 @@ export class TabExportComponent implements OnInit {
         this.filteredData = this.initialData;
         this.selectedCp = this.env.cpList;
         this.selectedType = this.env.typeList;
+        this.minRooms = 0;
+        this.minSeats = 0;
+        this.dateStart = new Date('1/1/2018');
+        this.dateEnd = new Date('1/1/2020');
 
     }
 
-    download() {
-        console.log(this.initialData);
+    downloadXSD() {
+        console.log('download xsd');
+    }
+
+    downloadXML() {
+        console.log('download : ', this.initialData);
         const xml = this.xmlExportService.getParisCultureAnalyseAsXml(this.filteredData);
-        this.downloadXMLFile(xml, 'XMLProjectData_' +  new Date().getTime() + '.xml', 'text/plain');
+        this.downloadFile(xml, 'XMLProjectData_' +  new Date().getTime() + '.xml', 'text/plain');
+        // console.log(this.xmlExportService.getXmlAsDownlodableFile(xml));
     }
 
-    downloadXMLFile(content, fileName, contentType) {
+    downloadFile(content, fileName, contentType) {
         const a = document.createElement('a');
         const file = new Blob([content], { type: contentType });
         a.href = URL.createObjectURL(file);
@@ -70,11 +85,30 @@ export class TabExportComponent implements OnInit {
         this.filterData();
     }
 
+    changeDate() {
+        if (this.dateStart >= this.dateEnd) {
+            this.dateStart = new Date(this.dateEnd);
+        }
+
+        this.filterData();
+    }
+
+    changeMins() {
+        if (this.minRooms < 0) {
+            this.minRooms = 0;
+        }
+        if (this.minSeats < 0) {
+            this.minSeats = 0;
+        }
+
+        this.filterData();
+    }
+
     filterData() {
         this.filteredData = _cloneDeep(this.initialData);
         this.filteredData.arrondissements = this.filteredData.arrondissements.filter(this.filterByPostcode).map(this.filterByType);
 
-        console.log(this.filteredData);
+        console.log('data uptdated : ', this.filteredData);
     }
 
     isSelected(item: string, list: string[]) {
@@ -84,20 +118,26 @@ export class TabExportComponent implements OnInit {
     filterByPostcode = quarter => this.isSelected(quarter.postcode, this.selectedCp);
     filterByType = quarter => {
         if (!this.selectedType.includes('Events')) {
-            quarter.nbItems -= quarter.events.nbItems;
             quarter.events = { nbItems: 0, items: [] };
+        } else {
+            quarter.events.items = quarter.events.items.filter(this.filterByDate);
+            quarter.events.nbItems = quarter.events.items.length;
         }
 
         if (!this.selectedType.includes('Cinemas')) {
-            quarter.nbItems -= quarter.cinemas.nbItems;
             quarter.cinemas = { nbItems: 0, items: [] };
+        } else {
+            quarter.cinemas.items = quarter.cinemas.items.filter(this.filterByNbRoomsAndSeats);
+            quarter.cinemas.nbItems = quarter.cinemas.items.length;
         }
 
         if (!this.selectedType.includes('Museums')) {
-            quarter.nbItems -= quarter.museums.nbItems;
             quarter.museums = { nbItems: 0, items: [] };
         }
 
+        quarter.nbItems = quarter.events.nbItems + quarter.cinemas.nbItems + quarter.museums.nbItems;
         return quarter;
     }
+    filterByNbRoomsAndSeats = cinema => parseInt(cinema.rooms, 10) >= this.minRooms && parseInt(cinema.places, 10) >= this.minSeats;
+    filterByDate = event => new Date(event.periode.start) >= new Date(this.dateStart) && new Date(event.periode.start) <= new Date(this.dateEnd);
 }

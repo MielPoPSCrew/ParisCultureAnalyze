@@ -17,12 +17,12 @@
                 <div class="header">
                     Cinéma
                 </div>
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Min rooms" value="0">
+                <mat-form-field>
+                    <input matInput [(ngModel)]="minRooms" placeholder="Min rooms" (ngModelChange)="changeMins()">
                 </mat-form-field>
 
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Min seats" value="0">
+                <mat-form-field>
+                    <input matInput [(ngModel)]="minSeats" placeholder="Min seats" (ngModelChange)="changeMins()">
                 </mat-form-field>   
             </div>
     
@@ -31,22 +31,32 @@
                     Events
                 </div>
                 <mat-form-field>
-                    <input matInput [matDatepicker]="dateStart" placeholder="Start date">
-                    <mat-datepicker-toggle matSuffix [for]="dateStart"></mat-datepicker-toggle>
-                    <mat-datepicker #dateStart></mat-datepicker>
+                    <input matInput [matDatepicker]="dateStartPicker" placeholder="Start date" [(ngModel)]="dateStart" (ngModelChange)="changeDate()">
+                    <mat-datepicker-toggle matSuffix [for]="dateStartPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dateStartPicker></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput [matDatepicker]="dateEnd" placeholder="End date">
-                    <mat-datepicker-toggle matSuffix [for]="dateEnd"></mat-datepicker-toggle>
-                    <mat-datepicker #dateEnd></mat-datepicker>
+                    <input matInput [matDatepicker]="dateEndPicker" placeholder="End date" [(ngModel)]="dateEnd" (ngModelChange)="changeDate()">
+                    <mat-datepicker-toggle matSuffix [for]="dateEndPicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dateEndPicker (change)="filterData()"></mat-datepicker>
                 </mat-form-field>
             </div>
         </div>
     </div>
 
     <div class="button">
-        <button mat-fab>
-            <mat-icon aria-label="download xml" (click)="download()">vertical_align_bottom</mat-icon>
+        <button mat-raised-button color="primary">
+            XML<mat-icon aria-label="download xml" (click)="downloadXML()">vertical_align_bottom</mat-icon>
         </button>
+
+        <button mat-raised-button color="warn">
+            XSD <mat-icon aria-label="download xsd" (click)="downloadXSD()">vertical_align_bottom</mat-icon>
+        </button>
+
+        <!-- <button mat-raised-button color="warn">
+            <a href="assets/xsd/paris-culture-analyser.xsd" download>
+                XSD <mat-icon aria-label="download xsd">vertical_align_bottom</mat-icon>
+            </a>
+        </button> -->
     </div>
 </div>

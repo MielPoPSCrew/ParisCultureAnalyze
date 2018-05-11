@@ -4,8 +4,8 @@
 
   <xs:complexType name="coordinateType">
     <xs:sequence>
-      <xs:element type="xs:decimal" name="latitude"/>
-      <xs:element type="xs:decimal" name="longitude"/>
+      <xs:element type="xs:decimal" name="latitude" nillable="true"/>
+      <xs:element type="xs:decimal" name="longitude" nillable="true"/>
     </xs:sequence>
   </xs:complexType>
   
@@ -21,7 +21,7 @@
 
   <xs:complexType name="cinemasType">
     <xs:sequence>
-      <xs:element type="cinemaType" name="cinema"/>
+      <xs:element type="cinemaType" name="cinema" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute type="xs:integer" name="total"/>
   </xs:complexType>
@@ -35,7 +35,7 @@
 
   <xs:complexType name="keywordsType">
     <xs:sequence>
-      <xs:element type="xs:string" name="keyword"/>
+      <xs:element type="xs:string" name="keyword" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -55,7 +55,7 @@
 
   <xs:complexType name="eventsType">
     <xs:sequence>
-      <xs:element type="eventType" name="event"/>
+      <xs:element type="eventType" name="event" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute type="xs:integer" name="total"/>
   </xs:complexType>
@@ -71,7 +71,7 @@
 
   <xs:complexType name="museumsType">
     <xs:sequence>
-      <xs:element type="museumType" name="museum"/>
+      <xs:element type="museumType" name="museum" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute type="xs:integer" name="total"/>
   </xs:complexType>
@@ -80,7 +80,7 @@
     <xs:sequence>
       <xs:element type="cinemasType" name="cinemas"/>
       <xs:element type="eventsType" name="events"/>
-      <xs:element type="museumType" name="museums"/>
+      <xs:element type="museumsType" name="museums"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="postcode"/>
     <xs:attribute type="xs:integer" name="total"/>
@@ -88,7 +88,7 @@
 
   <xs:complexType name="arrondissementsType">
     <xs:sequence>
-      <xs:element type="arrondissementType" name="arrondissement"/>
+      <xs:element type="arrondissementType" name="arrondissement" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute type="xs:long" name="exportDate"/>
   </xs:complexType>

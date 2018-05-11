@@ -19,7 +19,7 @@
         <mat-checkbox [(ngModel)]="isSorted" (change)="initChartData()">Sort</mat-checkbox>
     </div>
 
-    <div class="title">{{dataSelected}} in Paris per quarter - {{chartType}} chart</div>
+    <div class="title">{{dataSelected}} in Paris per district - {{chartType}} chart</div>
 
     <canvas *ngIf="chartType === 'pie' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"
     [chartType]="chartType" [options]="chartOptions"></canvas>

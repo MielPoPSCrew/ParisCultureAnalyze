@@ -57,3 +57,6 @@
     }
      
 }
+::ng-deep .mat-sort-header-arrow.ng-trigger.ng-trigger-arrowPosition {
+    opacity: 0;
+}

@@ -80,7 +80,7 @@
     <xs:sequence>
       <xs:element type="cinemasType" name="cinemas"/>
       <xs:element type="eventsType" name="events"/>
-      <xs:element type="musentegerumsType" name="museums"/>
+      <xs:element type="museumType" name="museums"/>
     </xs:sequence>
     <xs:attribute type="xs:string" name="postcode"/>
     <xs:attribute type="xs:integer" name="total"/>

@@ -43,18 +43,16 @@ export class TabExportComponent implements OnInit {
         this.minSeats = 0;
         this.dateStart = new Date('1/1/2018');
         this.dateEnd = new Date('1/1/2020');
-
     }
 
     downloadXSD() {
-        console.log('download xsd');
+        const xsd = this.xmlExportService.getParisCultureAnalyseAsXsd();
+        this.downloadFile(xsd, 'XSD_ParisCultureAnalyse.xsd', 'text/plain');
     }
 
     downloadXML() {
-        console.log('download : ', this.initialData);
         const xml = this.xmlExportService.getParisCultureAnalyseAsXml(this.filteredData);
-        this.downloadFile(xml, 'XMLProjectData_' +  new Date().getTime() + '.xml', 'text/plain');
-        // console.log(this.xmlExportService.getXmlAsDownlodableFile(xml));
+        this.downloadFile(xml, 'XML_ParisCultureAnalyse' +  new Date().getTime() + '.xml', 'text/plain');
     }
 
     downloadFile(content, fileName, contentType) {
@@ -107,8 +105,6 @@ export class TabExportComponent implements OnInit {
     filterData() {
         this.filteredData = _cloneDeep(this.initialData);
         this.filteredData.arrondissements = this.filteredData.arrondissements.filter(this.filterByPostcode).map(this.filterByType);
-
-        console.log('data uptdated : ', this.filteredData);
     }
 
     isSelected(item: string, list: string[]) {

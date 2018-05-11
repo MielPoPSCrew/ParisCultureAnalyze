@@ -35,7 +35,6 @@ export class TabExportComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.initialData);
         this.filteredData = this.initialData;
         this.selectedCp = this.env.cpList;
         this.selectedType = this.env.typeList;

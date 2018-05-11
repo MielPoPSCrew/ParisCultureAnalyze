@@ -37,7 +37,6 @@ export class XmlExportService {
     const xsdFile = new XMLHttpRequest();
     xsdFile.open('GET', 'assets/xsd/paris-culture-analyse.xsd', false);
     xsdFile.send();
-    console.log(xsdFile);
     return xsdFile.responseText;
   }
 

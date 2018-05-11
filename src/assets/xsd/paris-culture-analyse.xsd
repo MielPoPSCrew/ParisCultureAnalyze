@@ -13,7 +13,7 @@
     <xs:sequence>
       <xs:element type="xs:string" name="name"/>
       <xs:element type="xs:string" name="address"/>
-      <xs:element type="coordinateType" name="coordinate"/>
+      <xs:element type="coordinateType" name="coordinate" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute type="xs:integer" name="rooms"/>
     <xs:attribute type="xs:integer" name="places"/>
@@ -47,7 +47,7 @@
       <xs:element type="xs:string" name="website"/>
       <xs:element type="xs:string" name="place"/>
       <xs:element type="xs:string" name="address"/>
-      <xs:element type="coordinateType" name="coordinate"/>
+      <xs:element type="coordinateType" name="coordinate" minOccurs="0"/>
       <xs:element type="periodeType" name="periode"/>
       <xs:element type="keywordsType" name="keywords"/>
     </xs:sequence>
@@ -65,7 +65,7 @@
       <xs:element type="xs:string" name="name"/>
       <xs:element type="xs:string" name="website"/>
       <xs:element type="xs:string" name="address"/>
-      <xs:element type="coordinateType" name="coordinate"/>
+      <xs:element type="coordinateType" name="coordinate" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 

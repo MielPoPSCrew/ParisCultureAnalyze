@@ -61,5 +61,12 @@ export const environment = {
         '75018': '#BDBDBD',
         '75019': '#90A4AE',
         '75020': '#607D8B'
-    }
+    },
+    colorCompareList: [{
+        backgroundColor: [
+            '#7E57C2',
+            '#26A69A',
+            '#FFA726',
+        ]
+    }]
 };

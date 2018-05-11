@@ -32,7 +32,7 @@ export class TabCompareComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        this.chartsColors = this.env.colorList;
+        this.chartsColors = this.env.colorCompareList;
         this.quarterSelected_1 = this.env.cpList[0];
         this.quarterSelected_2 = this.env.cpList[1];
 

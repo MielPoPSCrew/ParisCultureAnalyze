@@ -20,10 +20,14 @@
 
         .quarters {
             flex: 1;
+            flex-wrap: wrap;
     
+            .master-checkbox {
+                margin-left: 20px;
+            }
+
             .mat-checkbox {
-                display: block;
-                margin: 3px 0;
+                margin: 5px 50px 5px 0;
             }
         }
     

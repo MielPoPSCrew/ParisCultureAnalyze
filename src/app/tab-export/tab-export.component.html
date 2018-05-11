@@ -2,7 +2,12 @@
     <div class="filters">
         <div class="quarters">
             <div class="title">DISTRICTS</div>
-            <div class="content">
+            <div class="master-checkbox">
+                <mat-checkbox [checked]="selectedCp.length !== 20" [indeterminate]="selectedCp.length > 0 && selectedCp.length < 20" (click)="toggleAllCp()">
+                    {{ selectedCp.length === 20 ? 'Deselect' : 'Select' }} all ?
+                </mat-checkbox>
+            </div>
+            <div class="content cplist">
                 <mat-checkbox *ngFor="let cp of env.cpList" [checked]="isSelected(cp, selectedCp)" (change)="toggleCpCheckbox(cp)">{{cp}}</mat-checkbox>
             </div>
         </div>
@@ -51,10 +56,9 @@
     </div>
 
     <div class="button">
-        <button mat-raised-button color="primary" (click)="downloadXML()">
+        <button mat-raised-button color="primary" (click)="downloadXML()" [disabled]="selectedCp.length === 0 || selectedType.length === 0">
             XML<mat-icon aria-label="download xml" >vertical_align_bottom</mat-icon>
         </button>
-
         <button mat-raised-button color="warn" (click)="downloadXSD()">
             XSD <mat-icon aria-label="download xsd" >vertical_align_bottom</mat-icon>
         </button>

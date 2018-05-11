@@ -72,6 +72,16 @@ export class TabExportComponent implements OnInit {
         this.filterData();
     }
 
+    toggleAllCp() {
+        if (this.selectedCp.length === 20) {
+            this.selectedCp = [];
+        } else {
+            this.selectedCp = this.env.cpList;
+        }
+
+        console.log(this.selectedCp);
+    }
+
     toggleTypeCheckbox(type: string) {
         if (this.selectedType.includes(type)) {
             this.selectedType = this.selectedType.filter(n => n !== type);

@@ -33,6 +33,13 @@ export class XmlExportService {
     return xmlformater(xml);
   }
 
+  public getParisCultureAnalyseAsXsd(): string {
+    const xsdFile = new XMLHttpRequest();
+    xsdFile.open('GET', 'assets/xsd/paris-culture-analyse.xsd', false);
+    xsdFile.send();
+    return xsdFile.responseText;
+  }
+
   private getParisCultureAnalyseAsJsonXml(data: ParisCultureAnalyse): any {
     const arrondissements: Arrondissement[] = [];
     data.arrondissements.forEach(item => arrondissements.push(this.getArrondissementAsJsonXml(item)));

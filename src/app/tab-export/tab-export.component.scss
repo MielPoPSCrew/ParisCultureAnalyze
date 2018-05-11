@@ -1,0 +1,59 @@
+.tab-export {
+    margin-top: 20px;
+
+    .filters {
+        display: flex;
+
+        *.title {
+            margin: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-bottom: solid 1px #01579B;
+            padding-bottom: 5px;
+        }
+
+        *.content {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .quarters {
+            flex: 1;
+    
+            .mat-checkbox {
+                display: block;
+                margin: 3px 0;
+            }
+        }
+    
+        .types {
+            flex: 1;
+    
+            .mat-checkbox {
+                display: block;
+                margin: 3px 0;
+            }
+        }
+    
+        .detail {
+            flex: 1;
+
+            .content {
+                .detail-cinemas,
+                .detail-events {
+                    .header {
+                        margin: 10px 0;
+                        font-weight: bold;
+                        font-size: 1.1em;
+                    }
+                }
+            }
+        }
+    }
+
+    .button {
+        text-align: center;
+        padding: 10px;
+    }
+}

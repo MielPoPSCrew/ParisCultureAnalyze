@@ -1,0 +1,62 @@
+<div class="tab-export" *ngIf="initialData">
+    <div class="filters">
+        <div class="quarters">
+            <div class="title">QUARTERS</div>
+            <div class="content">
+                <mat-checkbox *ngFor="let cp of env.cpList" [checked]="isSelected(cp, selectedCp)" (change)="toggleCpCheckbox(cp)">{{cp}}</mat-checkbox>
+            </div>
+        </div>
+    
+        <div class="types">
+            <div class="title">TYPES</div>
+            <div class="content">
+                <mat-checkbox *ngFor="let type of env.typeList" [checked]="isSelected(type, selectedType)" (change)="toggleTypeCheckbox(type)">{{type}}</mat-checkbox>
+            </div>
+        </div>
+    
+        <div class="detail">
+            <div class="title">DETAIL</div>
+    
+            <div class="content">
+                <div class="detail-cinemas" *ngIf="isSelected('Cinemas', selectedType)">
+                    <div class="header">
+                        Cinéma
+                    </div>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="minRooms" placeholder="Min rooms" (ngModelChange)="changeMins()">
+                    </mat-form-field>
+    
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="minSeats" placeholder="Min seats" (ngModelChange)="changeMins()">
+                    </mat-form-field>   
+                </div>
+        
+                <div class="detail-events" *ngIf="isSelected('Events', selectedType)">
+                    <div class="header">
+                        Events
+                    </div>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="dateStartPicker" placeholder="Start date" [(ngModel)]="dateStart" (ngModelChange)="changeDate()">
+                        <mat-datepicker-toggle matSuffix [for]="dateStartPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #dateStartPicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="dateEndPicker" placeholder="End date" [(ngModel)]="dateEnd" (ngModelChange)="changeDate()">
+                        <mat-datepicker-toggle matSuffix [for]="dateEndPicker"></mat-datepicker-toggle>
+                        <mat-datepicker #dateEndPicker (change)="filterData()"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="button">
+        <button mat-raised-button color="primary">
+            XML<mat-icon aria-label="download xml" (click)="downloadXML()">vertical_align_bottom</mat-icon>
+        </button>
+
+        <button mat-raised-button color="warn">
+            XSD <mat-icon aria-label="download xsd" (click)="downloadXSD()">vertical_align_bottom</mat-icon>
+        </button>
+    </div>
+</div>

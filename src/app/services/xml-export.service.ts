@@ -140,6 +140,10 @@ export class XmlExportService {
   }
 
   private getCoordinateaAsJsonXml(data: Coordinate): any {
+    if (!data.latitude || !data.longitude) {
+      return {};
+    }
+
     return {
       coordinate: [
         { name: 'latitude', text: data.latitude ? data.latitude : 0 },

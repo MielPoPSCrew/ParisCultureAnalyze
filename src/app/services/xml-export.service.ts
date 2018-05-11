@@ -142,8 +142,8 @@ export class XmlExportService {
   private getCoordinateaAsJsonXml(data: Coordinate): any {
     return {
       coordinate: [
-        { name: 'latitude', text: data.latitude },
-        { name: 'longitude', text: data.longitude },
+        { name: 'latitude', text: data.latitude ? data.latitude : 0 },
+        { name: 'longitude', text: data.longitude ? data.longitude : 0 },
       ]
     };
   }

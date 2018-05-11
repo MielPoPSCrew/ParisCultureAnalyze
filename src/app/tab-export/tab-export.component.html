@@ -1,7 +1,7 @@
 <div class="tab-export" *ngIf="initialData">
     <div class="filters">
         <div class="quarters">
-            <div class="title">QUARTERS</div>
+            <div class="title">DISTRICTS</div>
             <div class="content">
                 <mat-checkbox *ngFor="let cp of env.cpList" [checked]="isSelected(cp, selectedCp)" (change)="toggleCpCheckbox(cp)">{{cp}}</mat-checkbox>
             </div>

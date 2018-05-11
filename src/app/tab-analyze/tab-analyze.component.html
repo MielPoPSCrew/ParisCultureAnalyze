@@ -20,6 +20,7 @@
   </div>
 
   <div class="title">{{dataSelected}} in Paris per district - {{chartType}} chart</div>
+  <div class="districts-info">Click to hide</div>
 
   <div class="canvases">
     <canvas *ngIf="chartType === 'pie' && shouldRefresh" baseChart [data]="chartData" [labels]="chartLabels" [colors]="chartColors"

@@ -45,7 +45,9 @@ export class CinemaService {
 
     cinema.name = fields['nom_etablissement'];
     cinema.address = fields['adresse'];
+    fields['ecrans'] = fields['ecrans'].toString().replace(/\s/g, '');
     cinema.rooms = fields['ecrans'];
+    fields['fauteuils'] = fields['fauteuils'].toString().replace(/\s/g, '');
     cinema.places = fields['fauteuils'];
     cinema.coordinate = {
       latitude: fields['coordonnees'] ? fields['coordonnees'][0] : null,

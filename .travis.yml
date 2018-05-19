@@ -23,5 +23,7 @@ deploy:
   api_key:
     secure: $GITHUB_DEPLOY_KEY
   file: paris-culture-analyse.tar.gz
+  skip_cleanup: true
   on:
+    tags: true
     repo: MielPoPSCrew/ParisCultureAnalyze

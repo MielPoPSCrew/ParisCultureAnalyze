@@ -27,6 +27,7 @@ export class TabArrayComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
 
+    // tslint:disable-next-line:no-input-rename
     @Input('initialData') initialData: ParisCultureAnalyse;
 
     constructor() {

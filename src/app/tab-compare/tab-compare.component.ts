@@ -27,6 +27,7 @@ export class TabCompareComponent implements OnInit {
     public shouldRefresh = true;
     public formattedData: any;
 
+    // tslint:disable-next-line:no-input-rename
     @Input('initialData') initialData: ParisCultureAnalyse;
 
     constructor() { }

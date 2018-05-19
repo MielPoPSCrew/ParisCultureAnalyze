@@ -10,6 +10,10 @@ S'il est difficile de prétendre couvrir l'intégralité des manifestations cult
 
 Le sujet initial requiert la manipulation des données et leur traitement mais également l'uniformisation de leur format pour finalement proposer leur export au format XML. C'est également une fonctionnalité que nous avons implémenté facilitant ainsi la réutilisation potentielle des données par des utilisateurs.
 
+## Tester le projet
+
+Le projet est disponible [à cette adresse](https://paris-culture-analyse.firebaseapp.com).
+
 ## Sources
 
 Nous utilisons les sources de données suivantes :

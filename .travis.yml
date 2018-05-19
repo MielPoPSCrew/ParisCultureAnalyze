@@ -1,27 +1,24 @@
 language: node_js
 node_js:
-- "8"
-
+- '8'
 branches:
   only:
-    - master
-    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
-
+  - master
+  - "/^v\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
 before_script:
-  - npm install -g firebase-tools
-  - npm install -g @angular/cli
-
+- npm install -g firebase-tools
+- npm install -g @angular/cli
 script:
-  - ng build --prod
-
+- ng build --prod
 after_success:
-  - test $TRAVIS_BRANCH = "master" && firebase deploy -P default --token $FIREBASE_DEPLOY_KEY
-  - tar cvzf paris-culture-analyse.tar.gz dist/*
-
+- test $TRAVIS_BRANCH = "master" && firebase deploy --token $FIREBASE_DEPLOY_KEY
+- tar cvzf paris-culture-analyse.tar.gz dist/*
 deploy:
   provider: releases
   api_key:
-    secure: $GITHUB_DEPLOY_KEY
+    secure: I4b2ETSLXV/IhrbWh0ja4NirCxveIylCqsBmAhPHzeWkp2OVpU1T2vtfeOoI+ANuZR/XtPxYn/1vcr5+QeEg6yVbnS0k0IdkejxyjEpiE4XGe9Z3nvZWggfBQ5RJnDk2zeXgrxvAuYRtjhXPsHXYqhqgUQClI83TQszNp/WtoEuxqdAhHEPenPWRUf5VmdwagcGtKunQQPvG4/h+5JTo2Hr6bd0veRI/Wb9/np+jbXc3naf2dtfMOI0od+52niLcmHIjKMX9DuoMNONfLO41mOdT6B2DRNWQjGp8qDKJyzoXM90Irv/GbSuLfiGu4KLIFCuLX54LzV6bEOAzWqpVSY4tlCLmvRFqqw81kXvw+FGKqWEaPpsgzLpI7ekx8b+z6TR/th3+hsAE31AQA5dhsBkBeseWJvm6+y2JncBTOd25Q0yk7ljoWgJ/r2unv85ETEpaG6NdpsHysRiVw1Lyzu9SoVclL5NTzbBiexz9100Hv1sb8T2/3mh36nAm84An4keGenDraRGJHmgA+edzxC6Wi/EtZHWhJKHhagrUVAwVBmQ4i1lERSMG7Xg/FuuK5zLdB5h4UOepCdASoW4WKo5JE3gVEctNG8p9rYmyt4tuHif5AA8BsOH8r3x8h8XtVGQVCeTBk6wKcZK14WKB3vDRQkU+EitQ37CeicJQTPs=
   file: paris-culture-analyse.tar.gz
+  skip_cleanup: true
   on:
+    tags: true
     repo: MielPoPSCrew/ParisCultureAnalyze

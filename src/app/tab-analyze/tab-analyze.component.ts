@@ -24,6 +24,7 @@ export class TabAnalyzeComponent implements OnInit {
     public chartColors: any[];
     public formattedData: any;
 
+    // tslint:disable-next-line:no-input-rename
     @Input('initialData') initialData: ParisCultureAnalyse;
 
     constructor() { }

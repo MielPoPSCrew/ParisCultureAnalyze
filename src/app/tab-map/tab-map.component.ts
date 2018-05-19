@@ -19,6 +19,7 @@ import {ParisCultureAnalyse} from '../services/paris-culture.service';
 })
 
 export class TabMapComponent implements OnInit {
+    // tslint:disable-next-line:no-input-rename
     @Input('initialData') initialData: ParisCultureAnalyse;
     @ViewChild('googleMapView') gmapElement: any;
     @ViewChild('eventsDetails') eventsDetailsElement: any;

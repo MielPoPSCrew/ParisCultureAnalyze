@@ -30,9 +30,7 @@ export class TabExportComponent implements OnInit {
     // tslint:disable-next-line:no-input-rename
     @Input('initialData') initialData: ParisCultureAnalyse;
 
-    constructor(private xmlExportService: XmlExportService) {
-        // console.log('Tab export constructed', this.initialData);
-    }
+    constructor(private xmlExportService: XmlExportService) { }
 
     ngOnInit() {
         this.filteredData = this.initialData;
@@ -59,7 +57,9 @@ export class TabExportComponent implements OnInit {
         const file = new Blob([content], { type: contentType });
         a.href = URL.createObjectURL(file);
         a.download = fileName;
+        document.body.appendChild(a);
         a.click();
+        a.remove();
     }
 
     toggleCpCheckbox(cp: string) {
@@ -78,8 +78,6 @@ export class TabExportComponent implements OnInit {
         } else {
             this.selectedCp = this.env.cpList;
         }
-
-        console.log(this.selectedCp);
     }
 
     toggleTypeCheckbox(type: string) {
